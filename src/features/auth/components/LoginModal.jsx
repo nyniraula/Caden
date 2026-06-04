@@ -1,7 +1,28 @@
 import { ArrowRight, User } from "lucide-react";
 import CadenLogo from "../../../assets/Caden.svg";
+import useAppContext from "../../../hooks/useAppContext";
+import { useState } from "react";
+import Button from "../../../components/ui/Button";
+import Input from "../../../components/ui/Input";
 
 const LoginModal = () => {
+  const { appSettings, setAppSettings } = useAppContext();
+
+  const [userName, setUserName] = useState("");
+
+  //Finally found a useCallback
+  const handleAuth = () => {
+    if (userName.trim()) {
+      const updatedSettings = {
+        ...appSettings,
+        isAuthenticated: true,
+        userName: userName,
+      };
+
+      setAppSettings(updatedSettings);
+    }
+  };
+
   return (
     <div className="max-w-100 flex flex-col justify-center items-center rounded-xl gap-4 p-6 md:p-10 shadow-lg relative overflow-hidden">
       {/* // corner blur */}
@@ -29,30 +50,23 @@ const LoginModal = () => {
       </div>
 
       {/* input */}
-      <div className="w-full flex flex-col gap-2 ">
-        <label
-          htmlFor=""
-          className="text-xs md:text-sm font-semibold text-slate-900"
-        >
-          Your Name
-        </label>
-        <div className="flex justify-start items-center border rounded-lg border-slate-400 bg-[#faf8ff] overflow-hidden">
-          <span className="px-2 pr-0 py-2  bg-[#faf8ff]">
-            <User size={20} strokeWidth={1.3} color="#314158" />
-          </span>
-          <input
-            type="text"
-            placeholder="John Doe"
-            className="px-4 py-2 md:py-3 w-full text-sm md:text-base bg-[#faf8ff] outline-0"
-          />
-        </div>
-      </div>
+
+      <Input
+        value={userName}
+        placeholder={"John Doe"}
+        label={"Your Name"}
+        onChange={(event) => {
+          setUserName(event.target.value);
+        }}
+      >
+        <User size={20} strokeWidth={1.3} color="#314158" />
+      </Input>
 
       {/* btn */}
-      <button className="px-4 py-3 w-full bg-[#4f46e5] text-sm font-medium text-white rounded-lg flex items-center justify-center gap-2 cursor-pointer hover:bg-[#6c65eb] active:bg-[#8346e5] transiton-all duration-200">
+      <Button onClick={handleAuth}>
         Enter Dashboard
         <ArrowRight size={16} />
-      </button>
+      </Button>
 
       {/* Slogan */}
       <p className="text-xs md:text-sm text-slate-500 mt-3">
