@@ -1,9 +1,9 @@
-import Login from "./pages/Login";
+import TransactionModal from "./features/TransactionModal/components/TransactionModal";
 
 const App = () => {
   return (
-    <div>
-      <Login />
+    <div className="">
+      <TransactionModal />
     </div>
   );
 };

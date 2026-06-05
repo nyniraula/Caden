@@ -1,4 +1,4 @@
-const Input = ({ children, label, ...rest }) => {
+const Input = ({ children, label = "input field", ...rest }) => {
   return (
     <div className="w-full flex flex-col gap-2 ">
       <label

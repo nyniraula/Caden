@@ -1,14 +1,14 @@
-import { ArrowRight, User } from "lucide-react";
-import CadenLogo from "../../../assets/Caden.svg";
-import useAppContext from "../../../hooks/useAppContext";
-import { useState } from "react";
-import Button from "../../../components/ui/Button";
-import Input from "../../../components/ui/Input";
+import { ArrowRight, User } from 'lucide-react';
+import CadenLogo from '../../../assets/Caden.svg';
+import useAppContext from '../../../hooks/useAppContext';
+import { useState } from 'react';
+import Button from '../../../components/ui/Button';
+import Input from '../../../components/ui/Input';
 
 const LoginModal = () => {
   const { appSettings, setAppSettings } = useAppContext();
 
-  const [userName, setUserName] = useState("");
+  const [userName, setUserName] = useState('');
 
   //Finally found a useCallback
   const handleAuth = () => {
@@ -24,27 +24,27 @@ const LoginModal = () => {
   };
 
   return (
-    <div className="max-w-100 flex flex-col justify-center items-center rounded-xl gap-4 p-6 md:p-10 shadow-lg relative overflow-hidden">
+    <div className="relative flex max-w-100 flex-col items-center justify-center gap-4 overflow-hidden rounded-xl p-6 shadow-lg md:p-10">
       {/* // corner blur */}
-      <div className="w-1/2 aspect-square bg-[#e2dfff] rounded-full blur-3xl absolute top-0 right-0 translate-x-1/2 -translate-y-1/2 z-0"></div>
+      <div className="absolute top-0 right-0 z-0 aspect-square w-1/2 translate-x-1/2 -translate-y-1/2 rounded-full bg-[#e2dfff] blur-3xl"></div>
 
       {/* logo */}
-      <div className="flex flex-col justify-center items-center bg-purple-100/50 p-1 rounded-2xl">
+      <div className="flex flex-col items-center justify-center rounded-2xl bg-purple-100/50 p-1">
         <img
           src={CadenLogo}
           alt=""
-          width={"64px"}
-          height={"64px"}
-          className="w-14 md:w-16 aspect-square"
+          width={'64px'}
+          height={'64px'}
+          className="aspect-square w-14 md:w-16"
         />
       </div>
 
       {/* Welcome msg */}
-      <div className="flex flex-col justify-center items-center w-full gap-2 md:gap-3">
-        <h2 className="text-3xl md:text-4xl font-semibold text-slate-900 flex justify-center items-center">
+      <div className="flex w-full flex-col items-center justify-center gap-2 md:gap-3">
+        <h2 className="flex items-center justify-center text-3xl font-semibold text-slate-900 md:text-4xl">
           Welcome to Caden
         </h2>
-        <p className="text-xs md:text-sm text-slate-600">
+        <p className="text-xs text-slate-600 md:text-sm">
           Enter your name to access your dashboard.
         </p>
       </div>
@@ -53,8 +53,8 @@ const LoginModal = () => {
 
       <Input
         value={userName}
-        placeholder={"John Doe"}
-        label={"Your Name"}
+        placeholder={'John Doe'}
+        label={'Your Name'}
         onChange={(event) => {
           setUserName(event.target.value);
         }}
@@ -69,7 +69,7 @@ const LoginModal = () => {
       </Button>
 
       {/* Slogan */}
-      <p className="text-xs md:text-sm text-slate-500 mt-3">
+      <p className="mt-3 text-xs text-slate-500 md:text-sm">
         Less noise. More control.
       </p>
     </div>
