@@ -1,4 +1,4 @@
-const Input = ({ children, label = 'input field', type = 'text', ...rest }) => {
+const Textarea = ({ children, label = 'input field', ...rest }) => {
   return (
     <div className="flex w-full flex-col gap-2">
       <label
@@ -11,14 +11,13 @@ const Input = ({ children, label = 'input field', type = 'text', ...rest }) => {
         {children && (
           <span className="bg-[#faf8ff] px-2 py-2 pr-0">{children}</span>
         )}
-        <input
-          type={type}
-          className="w-full bg-[#faf8ff] px-4 py-2 text-sm outline-0 md:py-3 md:text-base"
+        <textarea
+          className="h-18 w-full resize-none bg-[#faf8ff] px-4 py-2 text-sm outline-0 md:py-3 md:text-base"
           {...rest}
-        />
+        ></textarea>
       </div>
     </div>
   );
 };
 
-export default Input;
+export default Textarea;
