@@ -77,7 +77,7 @@ const TransactionModal = () => {
     setType(segmentedControlBtns[0]);
     setAmount('0');
     setCategoryValue(null);
-    setDate('Fuck');
+    setDate('Invalid Date or Format');
     setNote('');
   }
 
@@ -85,9 +85,7 @@ const TransactionModal = () => {
     <div className="fixed top-0 flex h-screen w-full items-center justify-center px-3">
       <form
         className="mx-auto flex w-full max-w-110 flex-col overflow-hidden rounded-lg border border-slate-600"
-        onSubmit={(event) => {
-          handleSubmit(event);
-        }}
+        onSubmit={handleSubmit}
       >
         {/* form div */}
         <div className="flex flex-col items-center justify-center gap-4 bg-white p-6">
@@ -96,7 +94,7 @@ const TransactionModal = () => {
             <h2 className="text-base font-medium md:text-xl md:font-semibold">
               Add Transaction
             </h2>
-            <button>
+            <button type="button">
               <X size={18} strokeWidth={2} />
             </button>
           </div>
@@ -107,9 +105,7 @@ const TransactionModal = () => {
           {/* Amount Input */}
           <AmountInput
             amount={amount}
-            onChange={(event) => {
-              handleAmountChange(event);
-            }}
+            onChange={handleAmountChange}
             error={error.amount}
           />
 
@@ -130,9 +126,7 @@ const TransactionModal = () => {
             label="Date"
             placeholder="mm/dd/yy"
             value={date}
-            onChange={(event) => {
-              setDate(event.target.value);
-            }}
+            onChange={(event) => setDate(event.target.value)}
             error={error.date}
           />
 
@@ -141,9 +135,7 @@ const TransactionModal = () => {
             label="Notes (optional)"
             placeholder="Add a description..."
             value={note}
-            onChange={(event) => {
-              setNote(event.target.value);
-            }}
+            onChange={(event) => setNote(event.target.value)}
             error={error.textarea}
           ></Textarea>
         </div>
