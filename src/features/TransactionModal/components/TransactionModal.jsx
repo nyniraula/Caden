@@ -5,7 +5,7 @@ import { useState } from 'react';
 import SegmentedControls from '../../../components/ui/SegmentedControls';
 import SelectDropdown from '../../../components/ui/SelectDropdown';
 import Textarea from '../../../components/ui/Textarea';
-import { getDate } from '../../../lib/utils';
+import { getDate, validateDate } from '../../../lib/utils';
 import AmountInput from '../../../components/ui/AmountInput';
 
 const segmentedControlBtns = ['Expense', 'Income'];
@@ -29,19 +29,58 @@ const TransactionModal = () => {
   const [error, setError] = useState({}); //error object
 
   //verify Amount
-  function handleAmountInput(event) {
+  function handleAmountChange(event) {
     const value = event.target.value;
 
     //only accept empty value or digits (still str tho), the gibberish is regex
     // ^ -> start regex, /d -> digit, * -> any no of digits, $ -> end regex
-    if (value === '' || /^\d*.\d*$/.test(value)) {
+    if (value === '' || /^\d*(\.\d{0,2})?$/.test(value)) {
       setAmount(value);
     }
   }
 
+  function validateForm() {
+    const errorStatus = {};
+    //validate amount
+    if (amount == '' || Number.isNaN(amount) || Number(amount) <= 0) {
+      errorStatus.amount = 'Invalid Amount';
+    }
+
+    if (!categoryValue) {
+      errorStatus.category = 'Choose a category';
+    }
+
+    if (!validateDate(date)) {
+      errorStatus.date = 'Invalid date or format';
+    }
+
+    setError(errorStatus);
+
+    return true;
+  }
+
+  function handleSubmit(event) {
+    event.preventDefault();
+
+    if (!validateForm()) {
+      return false;
+    }
+
+    setType(segmentedControlBtns[0]);
+    setAmount('0');
+    setCategoryValue(null);
+    setDate(getDate());
+    setNote('');
+  }
+
   return (
     <div className="fixed top-0 flex h-screen w-full items-center justify-center px-3">
-      <form className="mx-auto flex w-full max-w-110 flex-col overflow-hidden rounded-lg border border-slate-600">
+      <form
+        className="mx-auto flex w-full max-w-110 flex-col overflow-hidden rounded-lg border border-slate-600"
+        onSubmit={(event) => {
+          handleSubmit(event);
+        }}
+      >
         {/* form div */}
         <div className="flex flex-col items-center justify-center gap-4 bg-white p-6">
           {/* Title row */}
@@ -61,8 +100,9 @@ const TransactionModal = () => {
           <AmountInput
             amount={amount}
             onChange={(event) => {
-              handleAmountInput(event);
+              handleAmountChange(event);
             }}
+            error={error.amount}
           />
 
           {/* Category dropdown */}
@@ -72,6 +112,7 @@ const TransactionModal = () => {
             categoryValue={categoryValue}
             setCategoryValue={setCategoryValue}
             categories={categories}
+            error={error.category}
           >
             Choose a Category
           </SelectDropdown>
@@ -84,6 +125,7 @@ const TransactionModal = () => {
             onChange={(event) => {
               setDate(event.target.value);
             }}
+            error={error.date}
           />
 
           {/* Notes Description */}
@@ -94,13 +136,8 @@ const TransactionModal = () => {
             onChange={(event) => {
               setNote(event.target.value);
             }}
+            error={error.textarea}
           ></Textarea>
-
-          {error && (
-            <span className="self-start text-xs text-red-400 md:text-sm">
-              Something Can't be other thing
-            </span>
-          )}
         </div>
 
         {/* btns */}
