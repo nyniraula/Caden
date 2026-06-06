@@ -1,11 +1,11 @@
-import { useState, useRef, useLayoutEffect } from 'react';
+import { useState, useRef, useEffect } from 'react';
 
 const SegmentedControls = ({ btns = [], setType }) => {
   const [activeIdx, setActiveIdx] = useState(0);
   const buttonRefs = useRef([]);
   const [slider, setSlider] = useState({});
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     // calculates active elements width and left positon relative to parent
     const activeLeft = buttonRefs.current[activeIdx].offsetLeft;
     const activeWidth = buttonRefs.current[activeIdx].offsetWidth;
@@ -25,7 +25,8 @@ const SegmentedControls = ({ btns = [], setType }) => {
       {btns.map((el, idx) => {
         return (
           <button
-            className="z-2 rounded-4xl bg-transparent px-6 py-2 text-sm transition-colors duration-300 md:px-8 md:font-semibold"
+            type="button"
+            className="z-2 rounded-4xl bg-transparent px-6 py-1 text-sm transition-colors duration-300 md:px-8 md:py-2 md:font-semibold"
             key={idx}
             style={{ color: `${activeIdx == idx ? 'white' : 'black'}` }}
             onClick={() => {

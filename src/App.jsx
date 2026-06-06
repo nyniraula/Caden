@@ -1,4 +1,4 @@
-import TransactionModal from "./features/TransactionModal/components/TransactionModal";
+import TransactionModal from './features/TransactionModal/components/TransactionModal';
 
 const App = () => {
   return (

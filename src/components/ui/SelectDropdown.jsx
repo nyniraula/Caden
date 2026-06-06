@@ -20,6 +20,7 @@ const SelectDropdown = ({
       </label>
 
       <button
+        type="button"
         className={`flex w-full items-center justify-between rounded-lg border border-slate-400 bg-[#faf8ff] px-4 py-2 text-sm outline-0 md:py-3 md:text-base ${isDropdownOpen ? 'rounded-b-none' : ''} ${categoryValue ? 'text-slate-900' : 'text-[#7d7c7f]'}`}
         onClick={() => {
           setIsDropdownOpen((prev) => !prev);
@@ -34,6 +35,7 @@ const SelectDropdown = ({
           {categories.map((el, idx) => {
             return (
               <button
+                type="button"
                 className="flex w-full items-center border-b border-slate-300 px-4 py-2 text-sm text-slate-700 last:border-b-0 hover:bg-[#dedce2] active:bg-[#dedce2] md:py-3"
                 key={el}
                 onClick={() => {
