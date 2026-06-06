@@ -41,21 +41,29 @@ const TransactionModal = () => {
 
   function validateForm() {
     const errorStatus = {};
+    let hasError = false;
     //validate amount
-    if (amount == '' || Number.isNaN(amount) || Number(amount) <= 0) {
+    if (amount == '' || Number.isNaN(Number(amount)) || Number(amount) <= 0) {
       errorStatus.amount = 'Invalid Amount';
+      hasError = true;
     }
 
     if (!categoryValue) {
       errorStatus.category = 'Choose a category';
+      hasError = true;
     }
 
     if (!validateDate(date)) {
       errorStatus.date = 'Invalid date or format';
+      hasError = true;
     }
 
-    setError(errorStatus);
+    if (hasError) {
+      setError(errorStatus);
+      return false;
+    }
 
+    setError({}); //a make sure to clear the old error if no error found on validation
     return true;
   }
 
@@ -69,7 +77,7 @@ const TransactionModal = () => {
     setType(segmentedControlBtns[0]);
     setAmount('0');
     setCategoryValue(null);
-    setDate(getDate());
+    setDate('Fuck');
     setNote('');
   }
 
