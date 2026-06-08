@@ -63,7 +63,7 @@ const LoginModal = () => {
       </Input>
 
       {/* btn */}
-      <Button onClick={handleAuth}>
+      <Button onClick={handleAuth} className={'w-full'}>
         Enter Dashboard
         <ArrowRight size={16} />
       </Button>

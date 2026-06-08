@@ -9,7 +9,6 @@ const SegmentedControls = ({ btns = [], setType }) => {
     // calculates active elements width and left positon relative to parent
     const activeLeft = buttonRefs.current[activeIdx].offsetLeft;
     const activeWidth = buttonRefs.current[activeIdx].offsetWidth;
-    console.log(activeIdx, activeLeft, activeWidth);
 
     // updates the slider values which in turn updates the slider.
     setSlider((prev) => ({ ...prev, left: activeLeft, width: activeWidth }));
@@ -26,7 +25,7 @@ const SegmentedControls = ({ btns = [], setType }) => {
         return (
           <button
             type="button"
-            className="z-2 rounded-4xl bg-transparent px-6 py-1 text-sm transition-colors duration-300 md:px-8 md:py-2 md:font-semibold"
+            className="z-2 rounded-4xl bg-transparent px-6 py-1 text-sm uppercase transition-colors duration-300 md:px-8 md:py-2 md:font-semibold"
             key={idx}
             style={{ color: `${activeIdx == idx ? 'white' : 'black'}` }}
             onClick={() => {

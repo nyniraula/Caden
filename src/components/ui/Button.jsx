@@ -5,7 +5,7 @@ const Button = ({ children, className, ...rest }) => {
     <button
       type="button"
       className={mergeClass(
-        'transiton-all flex w-full cursor-pointer items-center justify-center gap-2 rounded-lg bg-[#4f46e5] px-4 py-3 text-sm font-medium text-white duration-200 hover:-translate-y-0.5 hover:scale-102 hover:bg-[#6c65eb] active:bg-[#8346e5]',
+        'transiton-all flex cursor-pointer flex-nowrap items-center justify-center gap-2 rounded-lg bg-[#4f46e5] px-4 py-3 text-sm font-medium whitespace-nowrap text-white duration-200 hover:-translate-y-0.5 hover:scale-102 hover:bg-[#6c65eb] active:bg-[#8346e5]',
         className
       )}
       {...rest}

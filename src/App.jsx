@@ -1,10 +1,14 @@
-import TransactionModal from './features/TransactionModal/components/TransactionModal';
+import Transactions from './pages/Transactions';
+import AppProvider from './context/AppProvider';
+import TransactionProvider from './context/TransactionProvider';
 
 const App = () => {
   return (
-    <div className="">
-      <TransactionModal />
-    </div>
+    <AppProvider>
+      <TransactionProvider>
+        <Transactions />
+      </TransactionProvider>
+    </AppProvider>
   );
 };
 

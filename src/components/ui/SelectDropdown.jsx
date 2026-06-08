@@ -1,26 +1,30 @@
 import { ChevronDown, ChevronUp } from 'lucide-react';
 import { useState } from 'react';
 import ErrorText from './ErrorText';
+import { mergeClass } from '../../lib/utils';
 
 const SelectDropdown = ({
   children,
-  label = 'input field',
+  label,
   categoryValue,
   setCategoryValue,
   categories = [],
   error = false,
+  className,
 }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   return (
-    <div className="w-full">
+    <div className={mergeClass('w-full', className)}>
       <div className="relative flex w-full flex-col gap-2">
-        <label
-          htmlFor=""
-          className="text-xs font-semibold text-slate-900 md:text-sm"
-        >
-          {label}
-        </label>
+        {label && (
+          <label
+            htmlFor=""
+            className="text-xs font-semibold text-slate-900 md:text-sm"
+          >
+            {label}
+          </label>
+        )}
         <button
           type="button"
           className={`flex w-full items-center justify-between rounded-lg border border-slate-400 bg-[#faf8ff] px-4 py-2 text-sm outline-0 md:py-3 md:text-base ${isDropdownOpen ? 'rounded-b-none' : ''} ${categoryValue ? 'text-slate-900' : 'text-[#7d7c7f]'}`}

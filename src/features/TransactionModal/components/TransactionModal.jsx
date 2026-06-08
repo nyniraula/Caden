@@ -7,8 +7,9 @@ import SelectDropdown from '../../../components/ui/SelectDropdown';
 import Textarea from '../../../components/ui/Textarea';
 import { getDate, validateDate } from '../../../lib/utils';
 import AmountInput from '../../../components/ui/AmountInput';
+import { useEffect } from 'react';
 
-const segmentedControlBtns = ['Expense', 'Income'];
+const segmentedControlBtns = ['expense', 'income'];
 
 const categories = [
   'Groceries',
@@ -19,7 +20,7 @@ const categories = [
   'Shopping',
 ];
 
-const TransactionModal = () => {
+const TransactionModal = ({ setIsAddModelOpen, setTransactions }) => {
   const [type, setType] = useState(segmentedControlBtns[0]);
   const [amount, setAmount] = useState('0');
   const [categoryValue, setCategoryValue] = useState(null);
@@ -74,15 +75,36 @@ const TransactionModal = () => {
       return false;
     }
 
-    setType(segmentedControlBtns[0]);
-    setAmount('0');
-    setCategoryValue(null);
-    setDate('Invalid Date or Format');
-    setNote('');
+    setTransactions((prev) => [
+      ...prev,
+      {
+        id: crypto.randomUUID(),
+        type,
+        amount: Number(amount),
+        category: categoryValue,
+        date,
+        note,
+      },
+    ]);
+
+    setIsAddModelOpen(false);
   }
 
+  useEffect(() => {
+    function escGrab(event) {
+      if (event.key === 'Escape') {
+        setIsAddModelOpen(false);
+      }
+    }
+
+    window.addEventListener('keydown', escGrab);
+    return () => {
+      window.removeEventListener('keydown', escGrab);
+    };
+  }, [setIsAddModelOpen]);
+
   return (
-    <div className="fixed top-0 flex h-screen w-full items-center justify-center px-3">
+    <div className="fixed top-0 flex h-screen w-full items-center justify-center px-3 backdrop-blur-xs">
       <form
         className="mx-auto flex w-full max-w-110 flex-col overflow-hidden rounded-lg border border-slate-600"
         onSubmit={handleSubmit}
@@ -94,7 +116,11 @@ const TransactionModal = () => {
             <h2 className="text-base font-medium md:text-xl md:font-semibold">
               Add Transaction
             </h2>
-            <button type="button">
+            <button
+              type="button"
+              className="rounded-full p-2 hover:bg-gray-200 active:bg-red-200"
+              onClick={() => setIsAddModelOpen(false)}
+            >
               <X size={18} strokeWidth={2} />
             </button>
           </div>
@@ -142,7 +168,10 @@ const TransactionModal = () => {
 
         {/* btns */}
         <div className="flex w-full justify-end gap-4 bg-[#f2f3ff] px-6 py-3 md:py-4">
-          <Button className="w-auto bg-transparent text-slate-900 hover:bg-red-200 hover:text-white active:bg-red-400">
+          <Button
+            className="w-auto bg-transparent text-slate-900 hover:bg-red-200 hover:text-white active:bg-red-400"
+            onClick={() => setIsAddModelOpen(false)}
+          >
             cancel
           </Button>
           <Button className="w-auto" type="submit">

@@ -1,13 +1,13 @@
 // src/context/AppProvider.jsx
-import { useState } from "react";
-import { AppContext } from "./AppContext"; // Import the context
+import { useState } from 'react';
+import { AppContext } from './AppContext'; // Import the context
 
 const AppProvider = ({ children }) => {
   const [appSettings, setAppSettings] = useState({
-    theme: "light",
-    currency: "USD",
+    theme: 'light',
+    currency: 'USD',
     isAuthenticated: false,
-    userName: null,
+    userName: 'Val',
   });
 
   // CRITICAL: The 'value' prop must be here!

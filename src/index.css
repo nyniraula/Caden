@@ -1,7 +1,31 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
-@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@import 'tailwindcss';
 
 @theme {
-  --font-sans: "Inter", sans-serif;
-  --color-primary: "#3525cd";
+  --font-sans: 'Inter', sans-serif;
+  --color-primary: '#3525cd';
+}
+
+@layer base {
+  h1 {
+    @apply text-5xl leading-tight font-bold tracking-tight;
+  }
+  h2 {
+    @apply text-4xl leading-tight font-bold tracking-tight;
+  }
+  h3 {
+    @apply text-3xl leading-snug font-semibold tracking-tight;
+  }
+  h4 {
+    @apply text-2xl leading-snug font-semibold;
+  }
+  h5 {
+    @apply text-xl leading-normal font-medium;
+  }
+  h6 {
+    @apply text-lg leading-normal font-medium;
+  }
+  p {
+    @apply text-base leading-relaxed font-normal;
+  }
 }
