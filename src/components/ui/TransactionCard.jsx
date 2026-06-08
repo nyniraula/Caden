@@ -25,7 +25,7 @@ const TransactionCard = ({
         </div>
       </div>
 
-      <div className="flex-start flex gap-4">
+      <div className="flex items-center justify-start gap-4">
         {/* amount */}
         <div>
           <h6>
