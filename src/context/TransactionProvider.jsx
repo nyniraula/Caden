@@ -2,21 +2,24 @@ import { useState } from 'react';
 import { TransactionContext } from './TransactionContext';
 import { useEffect } from 'react';
 import useAppContext from '../hooks/useAppContext';
+import { getStorage } from '../lib/localStorage';
+import { saveTransactionSettings } from '../services/storage';
 
 const TransactionProvider = ({ children }) => {
   const { appSettings } = useAppContext();
   const userName = appSettings.userName;
 
-  const [transactions, setTransactions] = useState(
-    JSON.parse(localStorage.getItem(`${userName}Transactions`)) || []
-  );
+  const userObj = userName ? getStorage(userName) || {} : {};
+
+  const [transactions, setTransactions] = useState(userObj.transactions || []);
 
   useEffect(() => {
-    localStorage.setItem(
-      `${userName}Transactions`,
-      JSON.stringify(transactions)
-    );
+    saveTransactionSettings(userName, transactions);
   }, [transactions, userName]);
+
+  if (!userName) {
+    return <>{children}</>;
+  }
 
   return (
     <TransactionContext.Provider value={{ transactions, setTransactions }}>

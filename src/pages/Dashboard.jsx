@@ -145,7 +145,7 @@ const Dashboard = () => {
           <ChartComponent data={getGraphData(transactions)} />
 
           {/* recent transactions */}
-          <div className="flex min-w-[360px] flex-1 flex-col">
+          <div className="flex min-w-90 flex-1 flex-col">
             <div className="flex rounded-t-xl border-b border-slate-300 bg-white p-4">
               <h5 className="">Recent Transactions</h5>
             </div>
