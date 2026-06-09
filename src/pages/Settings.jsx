@@ -1,13 +1,10 @@
 import SelectDropdown from '../components/ui/SelectDropdown';
 import useAppContext from '../hooks/useAppContext';
 import { TriangleAlert } from 'lucide-react';
-import { setStorage } from '../lib/localStorage';
-import { useNavigate } from 'react-router';
 
 const Settings = () => {
   const { appSettings, setAppSettings } = useAppContext();
   console.log(appSettings);
-  const nav = useNavigate();
 
   function setCurrencyValue(value) {
     setAppSettings((prev) => ({ ...prev, currency: value }));
@@ -58,20 +55,6 @@ const Settings = () => {
           >
             Select a currency
           </SelectDropdown>
-
-          <div>
-            <p>Sign Out</p>
-
-            <button
-              className="rounded-lg bg-[#271aba] px-4 py-2 text-sm font-semibold whitespace-nowrap text-white"
-              onClick={() => {
-                setStorage('currentUser', null);
-                setAppSettings((prev) => ({ ...prev, userName: null }));
-              }}
-            >
-              Sign Out
-            </button>
-          </div>
         </div>
       </div>
 
@@ -90,14 +73,7 @@ const Settings = () => {
               personal information. This action cannot be undone.
             </p>
           </div>
-          <button
-            className="rounded-lg bg-[#ba1a1a] px-4 py-2 text-sm font-semibold whitespace-nowrap text-white"
-            onClick={() => {
-              localStorage.removeItem(appSettings.userName);
-              setStorage('currentUser', null);
-              nav('/login');
-            }}
-          >
+          <button className="rounded-lg bg-[#ba1a1a] px-4 py-2 text-sm font-semibold whitespace-nowrap text-white">
             Wipe All Data
           </button>
         </div>

@@ -20,7 +20,7 @@ const categories = [
   'Shopping',
 ];
 
-const TransactionModal = ({ setIsAddModalOpen, setTransactions }) => {
+const TransactionModal = ({ setIsAddModelOpen, setTransactions }) => {
   const [type, setType] = useState(segmentedControlBtns[0]);
   const [amount, setAmount] = useState('0');
   const [categoryValue, setCategoryValue] = useState(null);
@@ -87,13 +87,13 @@ const TransactionModal = ({ setIsAddModalOpen, setTransactions }) => {
       },
     ]);
 
-    setIsAddModalOpen(false);
+    setIsAddModelOpen(false);
   }
 
   useEffect(() => {
     function escGrab(event) {
       if (event.key === 'Escape') {
-        setIsAddModalOpen(false);
+        setIsAddModelOpen(false);
       }
     }
 
@@ -101,7 +101,7 @@ const TransactionModal = ({ setIsAddModalOpen, setTransactions }) => {
     return () => {
       window.removeEventListener('keydown', escGrab);
     };
-  }, [setIsAddModalOpen]);
+  }, [setIsAddModelOpen]);
 
   return (
     <div className="fixed top-0 left-0 flex h-screen w-full items-center justify-center px-3 backdrop-blur-xs">
@@ -119,7 +119,7 @@ const TransactionModal = ({ setIsAddModalOpen, setTransactions }) => {
             <button
               type="button"
               className="rounded-full p-2 hover:bg-gray-200 active:bg-red-200"
-              onClick={() => setIsAddModalOpen(false)}
+              onClick={() => setIsAddModelOpen(false)}
             >
               <X size={18} strokeWidth={2} />
             </button>
@@ -170,7 +170,7 @@ const TransactionModal = ({ setIsAddModalOpen, setTransactions }) => {
         <div className="flex w-full justify-end gap-4 bg-[#f2f3ff] px-6 py-3 md:py-4">
           <Button
             className="w-auto bg-transparent text-slate-900 hover:bg-red-200 hover:text-white active:bg-red-400"
-            onClick={() => setIsAddModalOpen(false)}
+            onClick={() => setIsAddModelOpen(false)}
           >
             cancel
           </Button>

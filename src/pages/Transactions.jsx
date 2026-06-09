@@ -9,7 +9,7 @@ import TransactionModal from '../features/TransactionModal/components/Transactio
 
 const Transactions = () => {
   const { transactions, setTransactions } = useTransactionContext();
-  const [isAddModelOpen, setIsAddModalOpen] = useState(false);
+  const [isAddModelOpen, setIsAddModelOpen] = useState(false);
 
   return (
     <div className="w-full">
@@ -28,7 +28,7 @@ const Transactions = () => {
           {/* btn */}
           <Button
             className="fixed right-6 bottom-6 w-auto rounded-full px-4 py-4 md:static md:rounded-lg md:px-4 md:py-3"
-            onClick={() => setIsAddModalOpen(true)}
+            onClick={() => setIsAddModelOpen(true)}
           >
             <span>
               <Plus />
@@ -66,7 +66,7 @@ const Transactions = () => {
       </div>
       {isAddModelOpen && (
         <TransactionModal
-          setIsAddModalOpen={setIsAddModalOpen}
+          setIsAddModelOpen={setIsAddModelOpen}
           setTransactions={setTransactions}
         />
       )}
