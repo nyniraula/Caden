@@ -8,6 +8,7 @@ const TransactionCard = ({
   amount,
   type,
   setTransactions,
+  btn = true,
 }) => {
   return (
     //   {/* item */}
@@ -38,19 +39,21 @@ const TransactionCard = ({
         </div>
 
         {/* delete btn */}
-        <button
-          className="rounded-full bg-red-500/40 p-2"
-          onClick={() => {
-            setTransactions((prev) => {
-              return prev.filter((el) => {
-                console.log(el.id, id);
-                return el.id !== id;
+        {btn && (
+          <button
+            className="rounded-full bg-red-500/40 p-2"
+            onClick={() => {
+              setTransactions((prev) => {
+                return prev.filter((el) => {
+                  console.log(el.id, id);
+                  return el.id !== id;
+                });
               });
-            });
-          }}
-        >
-          <Trash size={18} />
-        </button>
+            }}
+          >
+            <Trash size={18} />
+          </button>
+        )}
       </div>
     </div>
   );

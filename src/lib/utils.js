@@ -22,7 +22,7 @@ export function getDate() {
     date.getDate()
   );
 
-  const formattedDate = formattedDateArray.join('/');
+  const formattedDate = formattedDateArray.join('-');
 
   return formattedDate;
 }
@@ -40,7 +40,7 @@ export function getDateTime() {
 
 export function validateDate(dateStr) {
   //accepts yyyy/mm/dd format
-  const [y, m, d] = dateStr.split('/').map(Number);
+  const [y, m, d] = dateStr.split('-').map(Number);
   const date = new Date(y, m - 1, d);
 
   return (

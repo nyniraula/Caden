@@ -36,7 +36,7 @@ const SelectDropdown = ({
           {isDropdownOpen ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
         </button>
         {isDropdownOpen && (
-          <div className="absolute top-full mt-1 flex max-h-42 w-full flex-col overflow-y-auto rounded-b-lg border border-slate-400 bg-[#faf8ff] text-sm text-[#7d7c7f] outline-0 transition-all duration-300 md:mt-2 md:max-h-52 md:text-base">
+          <div className="absolute top-full z-10 mt-1 flex max-h-42 w-full flex-col overflow-y-auto rounded-b-lg border border-slate-400 bg-[#faf8ff] text-sm text-[#7d7c7f] outline-0 transition-all duration-300 md:mt-2 md:max-h-52 md:text-base">
             {categories.map((el, idx) => {
               return (
                 <button

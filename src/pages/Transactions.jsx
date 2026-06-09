@@ -7,15 +7,6 @@ import useTransactionContext from '../hooks/useTransactionContext';
 import { useState } from 'react';
 import TransactionModal from '../features/TransactionModal/components/TransactionModal';
 
-const categories = [
-  'Groceries',
-  'Dining Out',
-  'Entertainment',
-  'Transportation',
-  'Utilities',
-  'Shopping',
-];
-
 const Transactions = () => {
   const { transactions, setTransactions } = useTransactionContext();
   const [isAddModelOpen, setIsAddModelOpen] = useState(false);

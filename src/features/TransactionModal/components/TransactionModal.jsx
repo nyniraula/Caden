@@ -104,7 +104,7 @@ const TransactionModal = ({ setIsAddModelOpen, setTransactions }) => {
   }, [setIsAddModelOpen]);
 
   return (
-    <div className="fixed top-0 flex h-screen w-full items-center justify-center px-3 backdrop-blur-xs">
+    <div className="fixed top-0 left-0 flex h-screen w-full items-center justify-center px-3 backdrop-blur-xs">
       <form
         className="mx-auto flex w-full max-w-110 flex-col overflow-hidden rounded-lg border border-slate-600"
         onSubmit={handleSubmit}
