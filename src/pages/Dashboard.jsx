@@ -2,96 +2,39 @@ import { Plus } from 'lucide-react';
 import Button from '../components/ui/Button';
 import TransactionCard from '../components/ui/TransactionCard';
 import ChartComponent from '../components/ui/ChartComponent';
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import TransactionModal from '../features/TransactionModal/components/TransactionModal';
 import useUserContext from '../app/hooks/useUserContext';
-
-// Learn useMemo and memoize every func here.
-
-const calcNet = (transactions) => {
-  const netAmt = transactions.reduce((total, transaction) => {
-    if (transaction.type === 'income') {
-      return total + transaction.amount;
-    } else if (transaction.type === 'expense') {
-      return total - transaction.amount;
-    } else {
-      return total;
-    }
-  }, 0);
-  return Number(netAmt.toFixed(2));
-};
-
-const calcRecentMonthTotal = (transactions, type) => {
-  const date = new Date();
-  const thisMonth = date.getMonth() + 1;
-  const thisYear = date.getFullYear();
-  console.log();
-
-  const total = transactions.reduce((total, transaction) => {
-    const date = new Date(transaction.date);
-    const tMonth = date.getMonth() + 1;
-    const tYear = date.getFullYear();
-
-    if (
-      transaction.type === type &&
-      tMonth === thisMonth &&
-      tYear === thisYear
-    ) {
-      return total + transaction.amount;
-    } else {
-      return total;
-    }
-  }, 0);
-
-  return Number(total.toFixed(2));
-};
-
-const recentTransactions = (transactions) => {
-  const rev = [...transactions].reverse();
-  return rev.slice(0, 5);
-};
-
-const getGraphData = (transactions) => {
-  const now = new Date();
-  const currYear = now.getFullYear();
-  const currMonth = now.getMonth();
-
-  const monthlyGraphData = {};
-
-  for (let i = 5; i >= 0; i--) {
-    const date = new Date(currYear, currMonth - i, 1);
-    const key = `${date.getFullYear()}-${date.getMonth()}`;
-
-    monthlyGraphData[key] = {
-      month: date.toLocaleString('en-US', {
-        month: 'short',
-        year: 'numeric',
-      }),
-      income: 0,
-      expense: 0,
-    };
-  }
-
-  for (const txn of transactions) {
-    const date = new Date(txn.date);
-    const key = `${date.getFullYear()}-${date.getMonth()}`;
-
-    if (!monthlyGraphData[key]) continue;
-
-    monthlyGraphData[key][txn.type] += txn.amount;
-  }
-
-  return monthlyGraphData;
-};
+import {
+  calcNet,
+  calcRecentMonthTotal,
+  recentTransactions,
+  getGraphData,
+} from '../lib/transaction';
 
 const Dashboard = () => {
+  //global context state and dispatch
   const { state, dispatch } = useUserContext();
   const { userData } = state;
-  const txn = userData.txn;
+  const { txn } = userData;
 
+  // state for txn modal
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
-  const recentTxns = recentTransactions(txn);
 
+  //memoized funcs
+  const net = useMemo(() => calcNet(txn), [txn]);
+  const monthlyIncome = useMemo(
+    () => calcRecentMonthTotal(txn, 'income'),
+    [txn]
+  );
+  const monthlyExpense = useMemo(
+    () => calcRecentMonthTotal(txn, 'expense'),
+    [txn]
+  );
+  const recentTxn = useMemo(() => recentTransactions(txn), [txn]);
+  const graphData = useMemo(() => getGraphData(txn), [txn]);
+
+  
   return (
     <div className="w-full">
       <div className="min- flex w-full flex-col flex-nowrap gap-6 bg-[#faf8ff] p-6 md:p-8">
@@ -126,26 +69,22 @@ const Dashboard = () => {
           {/* Net balance */}
           <div className="flex min-h-40 flex-col items-start justify-center gap-3 rounded-lg bg-white px-4 py-2 shadow-2xl">
             <p>Net Balance</p>
-            <h1>${calcNet(txn)}</h1>
+            <h1>${net}</h1>
           </div>
           {/* Monthly Income */}
           <div className="flex min-h-40 flex-col items-start justify-center gap-3 rounded-lg bg-white px-4 py-2 shadow-2xl">
             <p>Total Income</p>
-            <h1 className="text-green-500">
-              + ${calcRecentMonthTotal(txn, 'income')}
-            </h1>
+            <h1 className="text-green-500">+ ${monthlyIncome}</h1>
           </div>
           {/* Monthly Expense */}
           <div className="flex min-h-40 flex-col items-start justify-center gap-3 rounded-lg bg-white px-4 py-2 shadow-2xl">
             <p>Total Expense</p>
-            <h1 className="text-red-500">
-              - ${calcRecentMonthTotal(txn, 'expense')}
-            </h1>
+            <h1 className="text-red-500">- ${monthlyExpense}</h1>
           </div>
         </div>
 
         <div className="flex flex-wrap items-start justify-center gap-8">
-          <ChartComponent data={getGraphData(txn)} />
+          <ChartComponent data={graphData} />
 
           {/* recent transactions */}
           <div className="flex min-w-90 flex-1 flex-col">
@@ -153,7 +92,7 @@ const Dashboard = () => {
               <h5 className="">Recent Transactions</h5>
             </div>
             <div className="flex flex-col gap-2 bg-white p-4">
-              {recentTxns.map((el) => {
+              {recentTxn.map((el) => {
                 return (
                   <TransactionCard
                     key={el.id}
