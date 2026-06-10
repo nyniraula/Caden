@@ -30,7 +30,7 @@ const Transactions = () => {
           </div>
           {/* btn */}
           <Button
-            className="fixed right-6 bottom-6 w-auto rounded-full px-4 py-4 md:static md:rounded-lg md:px-4 md:py-3"
+            className="fixed right-6 bottom-22 w-auto rounded-full px-4 py-4 md:static md:rounded-lg md:px-4 md:py-3"
             onClick={() => setIsAddModalOpen(true)}
           >
             <span>

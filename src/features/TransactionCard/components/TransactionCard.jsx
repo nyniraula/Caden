@@ -22,19 +22,32 @@ const TransactionCard = ({
 
   const currencySymbol = getCurrencySymbol(currency);
 
+  const formattedDate = new Date(date).toLocaleDateString('en-US', {
+    month: 'long',
+    day: '2-digit',
+    year: 'numeric',
+  });
+
   return (
     //   {/* item */}
-    <div className="flex w-full flex-wrap items-center justify-between gap-2 rounded-lg border border-zinc-400 p-2">
+    <div
+      className="group flex w-full flex-wrap items-center justify-between gap-2 rounded-lg border border-zinc-400 p-2 dark:border-zinc-500"
+      onContextMenu={(event) => {
+        event.preventDefault();
+      }}
+    >
       {/* date, category, note */}
       <div className="flex flex-wrap items-center justify-start gap-4 md:gap-8">
         {/* category, date */}
         <div className="flex flex-col flex-wrap items-start justify-center">
-          <h5>{category}</h5>
-          <p>{date}</p>
+          <h5 className="text-base text-zinc-900">{category}</h5>
+          <p className="text-xs font-semibold text-zinc-600 dark:text-zinc-400">
+            {formattedDate}
+          </p>
         </div>
 
         <div>
-          <p>{note}</p>
+          <p className="max-w-[15ch] truncate text-sm">{note}</p>
         </div>
       </div>
 
@@ -43,11 +56,11 @@ const TransactionCard = ({
         <div>
           <h6>
             {type.toLowerCase() === 'income' ? (
-              <span className="font-semibold text-green-500">
+              <span className="text-sm font-semibold text-green-500">
                 + {currencySymbol} {amount}
               </span>
             ) : (
-              <span className="font-semibold text-red-500">
+              <span className="text-sm font-semibold text-red-500">
                 - {currencySymbol} {amount}
               </span>
             )}
@@ -57,12 +70,12 @@ const TransactionCard = ({
         {/* delete btn */}
         {btn && (
           <button
-            className="rounded-full bg-red-500/40 p-2"
+            className="rounded-full bg-red-500/10 p-1 transition-all duration-300 group-hover:block group-focus:block lg:hidden"
             onClick={() => {
               dispatch({ type: 'DEL_TXN', id: id });
             }}
           >
-            <Trash size={18} />
+            <Trash size={18} strokeWidth={1.3} />
           </button>
         )}
       </div>
