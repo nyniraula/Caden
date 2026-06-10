@@ -7,7 +7,8 @@ const SelectDropdown = ({
   children,
   label,
   categoryValue,
-  setCategoryValue,
+  setCategoryValue = null,
+  dispatchX = null,
   categories = [],
   error = false,
   className,
@@ -44,7 +45,11 @@ const SelectDropdown = ({
                   className="flex w-full items-center border-b border-slate-300 px-4 py-2 text-sm text-slate-700 last:border-b-0 hover:bg-[#dedce2] active:bg-[#dedce2] md:py-3"
                   key={el}
                   onClick={() => {
-                    setCategoryValue(categories[idx]);
+                    if (dispatchX) {
+                      dispatchX(categories[idx]);
+                    } else {
+                      setCategoryValue(categories[idx]);
+                    }
                     setIsDropdownOpen(false);
                   }}
                 >

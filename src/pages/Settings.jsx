@@ -1,16 +1,19 @@
+import useUserContext from '../app/hooks/useUserContext';
 import SelectDropdown from '../components/ui/SelectDropdown';
-import useAppContext from '../hooks/useAppContext';
 import { TriangleAlert } from 'lucide-react';
 
 const Settings = () => {
-  const { appSettings, setAppSettings } = useAppContext();
-  console.log(appSettings);
+  const { state, dispatch } = useUserContext();
+  const { userData } = state;
+  const {
+    settings: { theme, currency },
+  } = userData;
 
-  function setCurrencyValue(value) {
-    setAppSettings((prev) => ({ ...prev, currency: value }));
+  function dispatchTheme(payload) {
+    return dispatch({ type: 'SET_THEME', theme: payload });
   }
-  function setThemeValue(value) {
-    setAppSettings((prev) => ({ ...prev, theme: value }));
+  function dispatchCurrency(payload) {
+    return dispatch({ type: 'SET_CURRENCY', currency: payload });
   }
 
   return (
@@ -39,22 +42,36 @@ const Settings = () => {
         <div className="flex w-full flex-col gap-4 py-4">
           <SelectDropdown
             label="Display Currency"
-            categoryValue={appSettings.currency}
-            categories={appSettings.availableCurrencies}
-            setCategoryValue={setCurrencyValue}
+            categoryValue={currency}
+            categories={['USD', 'EUR', 'NPR']}
+            dispatchX={dispatchCurrency}
           >
             Select a currency
           </SelectDropdown>
 
           <SelectDropdown
             label="Theme"
-            categoryValue={appSettings.theme}
+            categoryValue={theme}
             categories={['light', 'dark']}
-            setCategoryValue={setThemeValue}
+            dispatchX={dispatchTheme}
             className="w-auto"
           >
             Select a currency
           </SelectDropdown>
+
+          <div>
+            <p className="flex flex-col gap-2 text-sm font-semibold">
+              Sign out
+            </p>
+            <button
+              className="rounded-lg bg-purple-700 px-4 py-2 text-sm font-semibold whitespace-nowrap text-white"
+              onClick={() => {
+                dispatch({ type: 'SET_CURR_USER', newCurrentUser: null });
+              }}
+            >
+              Sign out
+            </button>
+          </div>
         </div>
       </div>
 
@@ -73,7 +90,13 @@ const Settings = () => {
               personal information. This action cannot be undone.
             </p>
           </div>
-          <button className="rounded-lg bg-[#ba1a1a] px-4 py-2 text-sm font-semibold whitespace-nowrap text-white">
+          <button
+            className="rounded-lg bg-[#ba1a1a] px-4 py-2 text-sm font-semibold whitespace-nowrap text-white"
+            onClick={() => {
+              localStorage.removeItem(userData.username);
+              dispatch({ type: 'SET_CURR_USER', newCurrentUser: null });
+            }}
+          >
             Wipe All Data
           </button>
         </div>

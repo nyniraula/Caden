@@ -3,10 +3,12 @@ import cadenLogo from '../../assets/Caden.svg';
 import { House, UserRound } from 'lucide-react';
 import { Wallet } from 'lucide-react';
 import { Settings } from 'lucide-react';
-import useAppContext from '../../hooks/useAppContext';
+import useUserContext from '../../app/hooks/useUserContext';
 
 const Sidebar = () => {
-  const { appSettings } = useAppContext();
+  const { state } = useUserContext();
+  const { userData } = state;
+  const { username } = userData;
 
   // prettier-ignore
   return (<div className="h-screen w-60 border-r-2 border-[#C7C4D8] flex flex-col justify-between items-center bg-[#faf8ff] p-4 ">
@@ -59,7 +61,7 @@ const Sidebar = () => {
 
     <div className="flex items-center justify-center gap-4">
       <div className='p-2 bg-slate-200 rounded-full'><UserRound size={20}/></div>
-      <h5>{appSettings.userName}</h5>
+      <h5>{username}</h5>
     </div>
   </div>
   </div>)

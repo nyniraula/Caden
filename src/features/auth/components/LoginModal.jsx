@@ -1,25 +1,21 @@
 import { ArrowRight, User } from 'lucide-react';
 import CadenLogo from '../../../assets/Caden.svg';
-import useAppContext from '../../../hooks/useAppContext';
 import { useState } from 'react';
 import Button from '../../../components/ui/Button';
 import Input from '../../../components/ui/Input';
+import useUserContext from '../../../app/hooks/useUserContext';
+import { useNavigate } from 'react-router';
 
 const LoginModal = () => {
-  const { appSettings, setAppSettings } = useAppContext();
+  const { dispatch } = useUserContext();
 
   const [userName, setUserName] = useState('');
-
+  const navigate = useNavigate();
   //Finally found a useCallback
   const handleAuth = () => {
     if (userName.trim()) {
-      const updatedSettings = {
-        ...appSettings,
-        isAuthenticated: true,
-        userName: userName,
-      };
-
-      setAppSettings(updatedSettings);
+      dispatch({ type: 'SET_CURR_USER', newCurrentUser: userName });
+      navigate('/');
     }
   };
 

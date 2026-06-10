@@ -1,13 +1,17 @@
 import { createBrowserRouter } from 'react-router';
-import RootLayout from './components/Layout/RootLayout';
 import Dashboard from './pages/Dashboard';
 import Transactions from './pages/Transactions';
 import Login from './pages/Login';
 import Settings from './pages/Settings';
+import ProtectedRoute from './components/Layout/ProtectedRoute';
 
 export const router = createBrowserRouter([
   {
-    Component: RootLayout,
+    path: '/login',
+    Component: Login,
+  },
+  {
+    Component: ProtectedRoute,
     children: [
       {
         path: '/',
@@ -17,10 +21,7 @@ export const router = createBrowserRouter([
         path: '/transactions',
         Component: Transactions,
       },
-      {
-        path: '/login',
-        Component: Login,
-      },
+
       {
         path: '/settings',
         Component: Settings,

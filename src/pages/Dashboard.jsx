@@ -1,10 +1,10 @@
 import { Plus } from 'lucide-react';
 import Button from '../components/ui/Button';
-import useTransactionContext from '../hooks/useTransactionContext';
 import TransactionCard from '../components/ui/TransactionCard';
 import ChartComponent from '../components/ui/ChartComponent';
 import { useState } from 'react';
 import TransactionModal from '../features/TransactionModal/components/TransactionModal';
+import useUserContext from '../app/hooks/useUserContext';
 
 // Learn useMemo and memoize every func here.
 
@@ -85,9 +85,12 @@ const getGraphData = (transactions) => {
 };
 
 const Dashboard = () => {
-  const { transactions, setTransactions } = useTransactionContext();
-  const recentTxns = recentTransactions(transactions);
+  const { state, dispatch } = useUserContext();
+  const { userData } = state;
+  const txn = userData.txn;
+
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+  const recentTxns = recentTransactions(txn);
 
   return (
     <div className="w-full">
@@ -123,29 +126,29 @@ const Dashboard = () => {
           {/* Net balance */}
           <div className="flex min-h-40 flex-col items-start justify-center gap-3 rounded-lg bg-white px-4 py-2 shadow-2xl">
             <p>Net Balance</p>
-            <h1>${calcNet(transactions)}</h1>
+            <h1>${calcNet(txn)}</h1>
           </div>
           {/* Monthly Income */}
           <div className="flex min-h-40 flex-col items-start justify-center gap-3 rounded-lg bg-white px-4 py-2 shadow-2xl">
             <p>Total Income</p>
             <h1 className="text-green-500">
-              + ${calcRecentMonthTotal(transactions, 'income')}
+              + ${calcRecentMonthTotal(txn, 'income')}
             </h1>
           </div>
           {/* Monthly Expense */}
           <div className="flex min-h-40 flex-col items-start justify-center gap-3 rounded-lg bg-white px-4 py-2 shadow-2xl">
             <p>Total Expense</p>
             <h1 className="text-red-500">
-              - ${calcRecentMonthTotal(transactions, 'expense')}
+              - ${calcRecentMonthTotal(txn, 'expense')}
             </h1>
           </div>
         </div>
 
         <div className="flex flex-wrap items-start justify-center gap-8">
-          <ChartComponent data={getGraphData(transactions)} />
+          <ChartComponent data={getGraphData(txn)} />
 
           {/* recent transactions */}
-          <div className="flex min-w-[360px] flex-1 flex-col">
+          <div className="flex min-w-90 flex-1 flex-col">
             <div className="flex rounded-t-xl border-b border-slate-300 bg-white p-4">
               <h5 className="">Recent Transactions</h5>
             </div>
@@ -160,7 +163,7 @@ const Dashboard = () => {
                     note={el.note}
                     amount={el.amount}
                     type={el.type}
-                    setTransactions={setTransactions}
+                    dispatch={dispatch}
                     btn={false}
                   />
                 );
@@ -176,7 +179,7 @@ const Dashboard = () => {
       {isAddModalOpen && (
         <TransactionModal
           setIsAddModalOpen={setIsAddModalOpen}
-          setTransactions={setTransactions}
+          dispatch={dispatch}
         />
       )}
     </div>

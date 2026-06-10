@@ -7,7 +7,7 @@ const TransactionCard = ({
   note,
   amount,
   type,
-  setTransactions,
+  dispatch,
   btn = true,
 }) => {
   return (
@@ -43,12 +43,7 @@ const TransactionCard = ({
           <button
             className="rounded-full bg-red-500/40 p-2"
             onClick={() => {
-              setTransactions((prev) => {
-                return prev.filter((el) => {
-                  console.log(el.id, id);
-                  return el.id !== id;
-                });
-              });
+              dispatch({ type: 'DEL_TXN', id: id });
             }}
           >
             <Trash size={18} />

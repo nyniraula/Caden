@@ -3,13 +3,16 @@ import Button from '../components/ui/Button';
 import Input from '../components/ui/Input';
 import { Plus } from 'lucide-react';
 import TransactionCard from '../components/ui/TransactionCard';
-import useTransactionContext from '../hooks/useTransactionContext';
 import { useState } from 'react';
 import TransactionModal from '../features/TransactionModal/components/TransactionModal';
+import useUserContext from '../app/hooks/useUserContext';
 
 const Transactions = () => {
-  const { transactions, setTransactions } = useTransactionContext();
   const [isAddModelOpen, setIsAddModelOpen] = useState(false);
+
+  const { state, dispatch } = useUserContext();
+  const { userData } = state;
+  const { txn } = userData;
 
   return (
     <div className="w-full">
@@ -48,7 +51,7 @@ const Transactions = () => {
         {/* Card table */}
         {/* container */}
         <div className="flex w-full flex-wrap items-center justify-center gap-2 rounded-lg bg-white p-4 whitespace-nowrap">
-          {transactions.map((el) => {
+          {txn.map((el) => {
             return (
               <TransactionCard
                 key={el.id}
@@ -58,7 +61,7 @@ const Transactions = () => {
                 note={el.note}
                 amount={el.amount}
                 type={el.type}
-                setTransactions={setTransactions}
+                dispatch={dispatch}
               />
             );
           })}
@@ -67,7 +70,7 @@ const Transactions = () => {
       {isAddModelOpen && (
         <TransactionModal
           setIsAddModelOpen={setIsAddModelOpen}
-          setTransactions={setTransactions}
+          dispatch={dispatch}
         />
       )}
     </div>

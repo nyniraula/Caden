@@ -20,7 +20,7 @@ const categories = [
   'Shopping',
 ];
 
-const TransactionModal = ({ setIsAddModelOpen, setTransactions }) => {
+const TransactionModal = ({ setIsAddModalOpen, dispatch }) => {
   const [type, setType] = useState(segmentedControlBtns[0]);
   const [amount, setAmount] = useState('0');
   const [categoryValue, setCategoryValue] = useState(null);
@@ -75,25 +75,27 @@ const TransactionModal = ({ setIsAddModelOpen, setTransactions }) => {
       return false;
     }
 
-    setTransactions((prev) => [
-      ...prev,
-      {
-        id: crypto.randomUUID(),
-        type,
-        amount: Number(amount),
-        category: categoryValue,
-        date,
-        note,
-      },
-    ]);
+    const newTxn = {
+      id: crypto.randomUUID(),
+      type,
+      amount: Number(amount),
+      category: categoryValue,
+      date,
+      note,
+    };
 
-    setIsAddModelOpen(false);
+    dispatch({
+      type: 'ADD_TXN',
+      newTxn,
+    });
+
+    setIsAddModalOpen(false);
   }
 
   useEffect(() => {
     function escGrab(event) {
       if (event.key === 'Escape') {
-        setIsAddModelOpen(false);
+        setIsAddModalOpen(false);
       }
     }
 
@@ -101,7 +103,7 @@ const TransactionModal = ({ setIsAddModelOpen, setTransactions }) => {
     return () => {
       window.removeEventListener('keydown', escGrab);
     };
-  }, [setIsAddModelOpen]);
+  }, [setIsAddModalOpen]);
 
   return (
     <div className="fixed top-0 left-0 flex h-screen w-full items-center justify-center px-3 backdrop-blur-xs">
@@ -119,7 +121,7 @@ const TransactionModal = ({ setIsAddModelOpen, setTransactions }) => {
             <button
               type="button"
               className="rounded-full p-2 hover:bg-gray-200 active:bg-red-200"
-              onClick={() => setIsAddModelOpen(false)}
+              onClick={() => setIsAddModalOpen(false)}
             >
               <X size={18} strokeWidth={2} />
             </button>
@@ -170,7 +172,7 @@ const TransactionModal = ({ setIsAddModelOpen, setTransactions }) => {
         <div className="flex w-full justify-end gap-4 bg-[#f2f3ff] px-6 py-3 md:py-4">
           <Button
             className="w-auto bg-transparent text-slate-900 hover:bg-red-200 hover:text-white active:bg-red-400"
-            onClick={() => setIsAddModelOpen(false)}
+            onClick={() => setIsAddModalOpen(false)}
           >
             cancel
           </Button>
