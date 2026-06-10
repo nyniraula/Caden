@@ -37,10 +37,10 @@ const LoginModal = () => {
 
       {/* Welcome msg */}
       <div className="flex w-full flex-col items-center justify-center gap-2 md:gap-3">
-        <h2 className="flex items-center justify-center text-3xl font-semibold text-slate-900 md:text-4xl">
+        <h2 className="flex items-center justify-center text-3xl font-semibold text-slate-900 md:text-4xl dark:text-[#f8f8f8]">
           Welcome to Caden
         </h2>
-        <p className="text-xs text-slate-600 md:text-sm">
+        <p className="text-xs text-slate-600 md:text-sm dark:text-slate-200">
           Enter your name to access your dashboard.
         </p>
       </div>

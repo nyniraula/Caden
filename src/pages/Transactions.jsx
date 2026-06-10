@@ -15,16 +15,16 @@ const Transactions = () => {
   const { txn } = userData;
 
   return (
-    <div className="w-full">
-      <div className="flex min-h-screen w-full flex-col flex-nowrap gap-6 bg-[#faf8ff] p-6 md:p-8">
+    <div className="w-full dark:text-[#f8f8f8]">
+      <div className="flex min-h-screen w-full flex-col flex-nowrap gap-6 bg-[#faf8ff] p-6 md:p-8 dark:bg-zinc-900">
         {/* Header */}
         <div className="flex flex-row flex-wrap items-center justify-between gap-4">
           {/* Text */}
           <div className="flex w-auto flex-col gap-0.5 md:gap-1">
-            <h2 className="text-2xl font-semibold text-slate-900 md:text-3xl">
+            <h2 className="text-2xl font-semibold text-slate-900 md:text-3xl dark:text-[#f8f8f8]">
               Transactions
             </h2>
-            <p className="text-xs text-slate-600 md:text-sm">
+            <p className="text-xs text-slate-600 md:text-sm dark:text-slate-200">
               Manage and track your financial activities.
             </p>
           </div>
@@ -40,7 +40,7 @@ const Transactions = () => {
           </Button>
         </div>
         {/* Search and Filters */}
-        <div className="flex w-full flex-row items-center justify-start gap-2 rounded-lg bg-white p-4 md:p-6">
+        <div className="flex w-full flex-row items-center justify-start gap-2 rounded-lg bg-white p-4 md:p-6 dark:bg-zinc-800">
           {/* Search */}
           <Input className="" placeholder="Search transactions">
             <Search />
@@ -50,7 +50,7 @@ const Transactions = () => {
         </div>
         {/* Card table */}
         {/* container */}
-        <div className="flex w-full flex-wrap items-center justify-center gap-2 rounded-lg bg-white p-4 whitespace-nowrap">
+        <div className="flex w-full flex-wrap items-center justify-center gap-2 rounded-lg bg-white p-4 whitespace-nowrap dark:bg-zinc-800">
           {txn.map((el) => {
             return (
               <TransactionCard

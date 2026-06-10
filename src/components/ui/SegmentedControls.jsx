@@ -15,7 +15,7 @@ const SegmentedControls = ({ btns = [], setType }) => {
   }, [activeIdx]);
 
   return (
-    <div className="relative flex items-center justify-center gap-2 rounded-4xl bg-[#eaedff] p-1">
+    <div className="relative flex items-center justify-center gap-2 rounded-4xl bg-[#eaedff] p-1 dark:bg-zinc-900">
       <div
         className="absolute top-1 bottom-1 z-0 rounded-4xl bg-[#3525cd] transition-all duration-300 ease-in-out"
         style={{ width: slider.width, left: slider.left }}
@@ -27,7 +27,7 @@ const SegmentedControls = ({ btns = [], setType }) => {
             type="button"
             className="z-2 rounded-4xl bg-transparent px-6 py-1 text-sm uppercase transition-colors duration-300 md:px-8 md:py-2 md:font-semibold"
             key={idx}
-            style={{ color: `${activeIdx == idx ? 'white' : 'black'}` }}
+            style={{ color: `${activeIdx == idx ? 'white' : '#9f9fa9'}` }}
             onClick={() => {
               setActiveIdx(idx);
               setType(btns[idx]);

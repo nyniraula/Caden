@@ -112,7 +112,7 @@ const TransactionModal = ({ setIsAddModalOpen, dispatch }) => {
         onSubmit={handleSubmit}
       >
         {/* form div */}
-        <div className="flex flex-col items-center justify-center gap-4 bg-white p-6">
+        <div className="flex flex-col items-center justify-center gap-4 bg-white p-6 dark:bg-zinc-800 dark:text-[#f8f8f8]">
           {/* Title row */}
           <div className="flex w-full items-center justify-between">
             <h2 className="text-base font-medium md:text-xl md:font-semibold">
@@ -120,7 +120,7 @@ const TransactionModal = ({ setIsAddModalOpen, dispatch }) => {
             </h2>
             <button
               type="button"
-              className="rounded-full p-2 hover:bg-gray-200 active:bg-red-200"
+              className="rounded-full p-2 hover:bg-gray-500 active:bg-red-200"
               onClick={() => setIsAddModalOpen(false)}
             >
               <X size={18} strokeWidth={2} />
@@ -169,9 +169,9 @@ const TransactionModal = ({ setIsAddModalOpen, dispatch }) => {
         </div>
 
         {/* btns */}
-        <div className="flex w-full justify-end gap-4 bg-[#f2f3ff] px-6 py-3 md:py-4">
+        <div className="flex w-full justify-end gap-4 bg-[#f2f3ff] px-6 py-3 md:py-4 dark:bg-zinc-800">
           <Button
-            className="w-auto bg-transparent text-slate-900 hover:bg-red-200 hover:text-white active:bg-red-400"
+            className="w-auto bg-transparent text-slate-900 hover:bg-red-400 hover:text-[#f8f8f8] active:bg-red-400 dark:text-[#f8f8f8]"
             onClick={() => setIsAddModalOpen(false)}
           >
             cancel

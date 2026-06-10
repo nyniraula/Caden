@@ -11,7 +11,7 @@ const Sidebar = () => {
   const { username } = userData;
 
   // prettier-ignore
-  return (<div className="h-screen w-60 border-r-2 border-[#C7C4D8] flex flex-col justify-between items-center bg-[#faf8ff] p-4 ">
+  return (<div className="h-screen w-60 border-r-2 border-zinc-700 flex flex-col justify-between items-center bg-[#faf8ff] dark:bg-zinc-900 p-4 ">
 {/* top row */}
   <div className='flex flex-col gap-6 w-full'>
     {/* Logo and Name */}
@@ -23,30 +23,30 @@ const Sidebar = () => {
       </div>
       <div className='flex flex-col'>
         <h4 className='text-fuchsia-700 text-xl'>Caden</h4>
-        <p className='text-xs tracking-tighter text-slate-600'>Know your cash</p>
+        <p className='text-xs tracking-tighter text-slate-600 dark:text-slate-200'>Know your cash</p>
       </div>
 
   
 
     </div>
       {/* links */}
-   <div className='flex flex-col gap-3'>
+   <div className='flex flex-col gap-3 dark:text-[#f8f8f8]' >
     <NavLink to='/' className={({isActive})=>
-    `flex gap-2 justify-start items-center px-2  py-4 w-full ${isActive?'bg-[#C9E6FF] rounded-lg border-l-3 border-fuchsia-700 ':''}`
+    `flex gap-2 justify-start items-center px-2  py-4 w-full ${isActive?'bg-[#C9E6FF] dark:bg-zinc-600 rounded-lg border-l-3 border-fuchsia-700 ':''}`
     }>
       <House size={18} strokeWidth={2}/>
       <span className='text-sm font-semibold'>Home</span>
     </NavLink>
 
     <NavLink to='/transactions' className={({isActive})=>
-       `flex gap-2 justify-start items-center px-2 py-4 w-full ${isActive?'bg-[#C9E6FF] rounded-lg border-l-3 border-fuchsia-700 ':''}`
+       `flex gap-2 justify-start items-center px-2 py-4 w-full ${isActive?'bg-[#C9E6FF] dark:bg-zinc-600 rounded-lg border-l-3 border-fuchsia-700 ':''}`
     }>
       <Wallet size={18} strokeWidth={2}/>
       <span className='text-sm font-semibold'>Transactions</span>
     </NavLink>
 
     <NavLink to='/settings' className={({isActive})=>
-      `flex gap-2 justify-start items-center px-2 py-4 w-full ${isActive?'bg-[#C9E6FF] rounded-lg border-l-3 border-fuchsia-700 ':''}`
+      `flex gap-2 justify-start items-center px-2 py-4 w-full ${isActive?'bg-[#C9E6FF] dark:bg-zinc-600 rounded-lg border-l-3 border-fuchsia-700 ':''}`
     }>
       <Settings size={18} strokeWidth={2}/>
       <span className='text-sm font-semibold'>Settings</span>
@@ -56,7 +56,7 @@ const Sidebar = () => {
   
 
 {/* bottom row */}
-<div className='border-t-2 w-full border-[#C7C4D8] py-2 pt-4'>
+<div className='border-t-2 w-full border-zinc-700 py-2 pt-4 dark:text-[#f8f8f8]'>
 
 
     <div className="flex items-center justify-center gap-4">

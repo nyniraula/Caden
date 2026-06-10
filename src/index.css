@@ -29,3 +29,5 @@
     @apply text-base leading-relaxed font-normal;
   }
 }
+
+@variant dark (&:where(.dark, .dark *));

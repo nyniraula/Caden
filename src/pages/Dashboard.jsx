@@ -11,6 +11,7 @@ import {
   recentTransactions,
   getGraphData,
 } from '../lib/transaction';
+import { Link } from 'react-router';
 
 const Dashboard = () => {
   //global context state and dispatch
@@ -34,18 +35,17 @@ const Dashboard = () => {
   const recentTxn = useMemo(() => recentTransactions(txn), [txn]);
   const graphData = useMemo(() => getGraphData(txn), [txn]);
 
-  
   return (
     <div className="w-full">
-      <div className="min- flex w-full flex-col flex-nowrap gap-6 bg-[#faf8ff] p-6 md:p-8">
+      <div className="min- flex min-h-screen w-full flex-col flex-nowrap gap-6 bg-[#faf8ff] p-6 md:p-8 dark:bg-zinc-900">
         {/* Header */}
         <div className="flex flex-row flex-wrap items-center justify-between gap-4">
           {/* Text */}
           <div className="flex w-auto flex-col gap-0.5 md:gap-1">
-            <h2 className="text-2xl font-semibold text-slate-900 md:text-3xl">
+            <h2 className="text-2xl font-semibold text-slate-900 md:text-3xl dark:text-[#f8f8f8]">
               Dashboard
             </h2>
-            <p className="text-xs text-slate-600 md:text-sm">
+            <p className="text-xs text-slate-600 md:text-sm dark:text-slate-200">
               Welcome back, Val. Here's your financial overview.
             </p>
           </div>
@@ -63,21 +63,21 @@ const Dashboard = () => {
 
         {/* balance and stuff */}
         <div
-          className="grid w-full gap-3 md:gap-6"
+          className="grid w-full gap-3 md:gap-6 dark:text-[#f8f8f8]"
           style={{ gridTemplateColumns: `repeat(auto-fit, minmax(320px,1fr))` }}
         >
           {/* Net balance */}
-          <div className="flex min-h-40 flex-col items-start justify-center gap-3 rounded-lg bg-white px-4 py-2 shadow-2xl">
+          <div className="flex min-h-40 flex-col items-start justify-center gap-3 rounded-lg bg-white px-4 py-2 shadow-2xl dark:bg-zinc-800 dark:text-[#f8f8f8]">
             <p>Net Balance</p>
             <h1>${net}</h1>
           </div>
           {/* Monthly Income */}
-          <div className="flex min-h-40 flex-col items-start justify-center gap-3 rounded-lg bg-white px-4 py-2 shadow-2xl">
+          <div className="flex min-h-40 flex-col items-start justify-center gap-3 rounded-lg bg-white px-4 py-2 shadow-2xl dark:bg-zinc-800">
             <p>Total Income</p>
             <h1 className="text-green-500">+ ${monthlyIncome}</h1>
           </div>
           {/* Monthly Expense */}
-          <div className="flex min-h-40 flex-col items-start justify-center gap-3 rounded-lg bg-white px-4 py-2 shadow-2xl">
+          <div className="flex min-h-40 flex-col items-start justify-center gap-3 rounded-lg bg-white px-4 py-2 shadow-2xl dark:bg-zinc-800">
             <p>Total Expense</p>
             <h1 className="text-red-500">- ${monthlyExpense}</h1>
           </div>
@@ -87,11 +87,11 @@ const Dashboard = () => {
           <ChartComponent data={graphData} />
 
           {/* recent transactions */}
-          <div className="flex min-w-90 flex-1 flex-col">
-            <div className="flex rounded-t-xl border-b border-slate-300 bg-white p-4">
+          <div className="flex min-w-90 flex-1 flex-col dark:text-[#f8f8f8]">
+            <div className="flex rounded-t-xl border-b border-slate-300 bg-white p-4 dark:bg-zinc-800">
               <h5 className="">Recent Transactions</h5>
             </div>
-            <div className="flex flex-col gap-2 bg-white p-4">
+            <div className="flex flex-col gap-2 bg-white p-4 dark:bg-zinc-800">
               {recentTxn.map((el) => {
                 return (
                   <TransactionCard
@@ -108,8 +108,12 @@ const Dashboard = () => {
                 );
               })}
             </div>
-            <div className="flex rounded-t-xl border-b border-slate-300 bg-white p-4">
-              <h5 className="">Show more</h5>
+            <div className="flex rounded-b-xl border-b border-slate-300 bg-white p-4 dark:bg-zinc-800">
+              <Link to={'/transactions'}>
+                <p className="text-blue-700 hover:text-blue-400 hover:underline">
+                  Show more
+                </p>
+              </Link>
             </div>
           </div>
         </div>

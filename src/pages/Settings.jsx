@@ -17,24 +17,24 @@ const Settings = () => {
   }
 
   return (
-    <div className="flex min-h-screen w-full flex-col flex-nowrap gap-6 bg-[#faf8ff] p-6 md:p-8">
+    <div className="flex min-h-screen w-full flex-col flex-nowrap gap-6 bg-[#faf8ff] p-6 md:p-8 dark:bg-zinc-900">
       {/* Header */}
       <div className="flex flex-row flex-wrap items-center justify-between gap-4">
         {/* Text */}
         <div className="flex w-auto flex-col gap-0.5 md:gap-1">
-          <h2 className="text-2xl font-semibold text-slate-900 md:text-3xl">
+          <h2 className="text-2xl font-semibold text-slate-900 md:text-3xl dark:text-[#f8f8f8]">
             Settings
           </h2>
-          <p className="text-xs text-slate-600 md:text-sm">
+          <p className="text-xs text-slate-600 md:text-sm dark:text-slate-200">
             Manage your app preferences and data security
           </p>
         </div>
       </div>
 
       {/* Preferences */}
-      <div className="w-full rounded-xl bg-white p-4">
+      <div className="w-full rounded-xl bg-white p-4 dark:bg-zinc-800">
         {/* title */}
-        <div className="w-full border-b-2 border-zinc-300 py-2">
+        <div className="w-full border-b-2 border-zinc-300 py-2 dark:text-[#f8f8f8]">
           <h4>Preferences</h4>
         </div>
 
@@ -59,12 +59,12 @@ const Settings = () => {
             Select a currency
           </SelectDropdown>
 
-          <div>
+          <div className="dark:text-[#f8f8f8]">
             <p className="flex flex-col gap-2 text-sm font-semibold">
               Sign out
             </p>
             <button
-              className="rounded-lg bg-purple-700 px-4 py-2 text-sm font-semibold whitespace-nowrap text-white"
+              className="rounded-lg bg-purple-700 px-4 py-2 text-sm font-semibold whitespace-nowrap text-[#f8f8f8]"
               onClick={() => {
                 dispatch({ type: 'SET_CURR_USER', newCurrentUser: null });
               }}
@@ -75,7 +75,7 @@ const Settings = () => {
         </div>
       </div>
 
-      <div className="flex w-full flex-col flex-wrap gap-2 rounded-xl border border-[#ba1a1a] bg-[#ba1a1a]/20 p-4">
+      <div className="flex w-full flex-col flex-wrap gap-2 rounded-xl border border-[#ba1a1a] bg-[#ba1a1a]/20 p-4 dark:text-[#f8f8f8]">
         {/* title */}
         <div className="flex gap-3">
           <TriangleAlert color="#ba1a1a" strokeWidth={1.5} />
@@ -85,13 +85,13 @@ const Settings = () => {
         <div className="flex items-center justify-between gap-2">
           <div>
             <h6 className="text-lg">Delete Data</h6>
-            <p className="text-sm text-slate-600">
+            <p className="text-sm text-slate-600 dark:text-slate-200">
               Permanently remove all your financial history, budgets, and
               personal information. This action cannot be undone.
             </p>
           </div>
           <button
-            className="rounded-lg bg-[#ba1a1a] px-4 py-2 text-sm font-semibold whitespace-nowrap text-white"
+            className="rounded-lg bg-[#ba1a1a] px-4 py-2 text-sm font-semibold whitespace-nowrap text-[#f8f8f8]"
             onClick={() => {
               localStorage.removeItem(userData.username);
               dispatch({ type: 'SET_CURR_USER', newCurrentUser: null });
