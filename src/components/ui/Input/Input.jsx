@@ -1,5 +1,5 @@
-import { mergeClass } from '../../lib/utils';
-import ErrorText from './ErrorText';
+import { mergeClass } from '../../../lib/utils';
+import ErrorText from '../feedback/ErrorText';
 
 const Input = ({
   children,

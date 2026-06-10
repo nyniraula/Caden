@@ -49,3 +49,16 @@ export function validateDate(dateStr) {
     date.getFullYear() === y
   );
 }
+
+export function getCurrencySymbol(currency) {
+  switch (currency) {
+    case 'USD':
+      return '$';
+    case 'EUR':
+      return '€';
+    case 'NPR':
+      return 'रु';
+    default:
+      return '$';
+  }
+}

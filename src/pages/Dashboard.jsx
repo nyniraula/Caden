@@ -1,7 +1,7 @@
 import { Plus } from 'lucide-react';
-import Button from '../components/ui/Button';
-import TransactionCard from '../components/ui/TransactionCard';
-import ChartComponent from '../components/ui/ChartComponent';
+import Button from '../components/ui/Input/Button';
+import TransactionCard from '../features/TransactionCard/components/TransactionCard';
+import ChartComponent from '../components/ui/graphs/ChartComponent';
 import { useState, useMemo } from 'react';
 import TransactionModal from '../features/TransactionModal/components/TransactionModal';
 import useUserContext from '../app/hooks/useUserContext';
@@ -12,12 +12,18 @@ import {
   getGraphData,
 } from '../lib/transaction';
 import { Link } from 'react-router';
+import { getCurrencySymbol } from '../lib/utils';
 
 const Dashboard = () => {
   //global context state and dispatch
   const { state, dispatch } = useUserContext();
   const { userData } = state;
-  const { txn } = userData;
+  const {
+    txn,
+    settings: { currency },
+  } = userData;
+
+  const currencySymbol = getCurrencySymbol(currency);
 
   // state for txn modal
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
@@ -69,17 +75,23 @@ const Dashboard = () => {
           {/* Net balance */}
           <div className="flex min-h-40 flex-col items-start justify-center gap-3 rounded-lg bg-white px-4 py-2 shadow-2xl dark:bg-zinc-800 dark:text-[#f8f8f8]">
             <p>Net Balance</p>
-            <h1>${net}</h1>
+            <h1>
+              {currencySymbol} {net}
+            </h1>
           </div>
           {/* Monthly Income */}
           <div className="flex min-h-40 flex-col items-start justify-center gap-3 rounded-lg bg-white px-4 py-2 shadow-2xl dark:bg-zinc-800">
             <p>Total Income</p>
-            <h1 className="text-green-500">+ ${monthlyIncome}</h1>
+            <h1 className="text-green-500">
+              + {currencySymbol} {monthlyIncome}
+            </h1>
           </div>
           {/* Monthly Expense */}
           <div className="flex min-h-40 flex-col items-start justify-center gap-3 rounded-lg bg-white px-4 py-2 shadow-2xl dark:bg-zinc-800">
             <p>Total Expense</p>
-            <h1 className="text-red-500">- ${monthlyExpense}</h1>
+            <h1 className="text-red-500">
+              - {currencySymbol} {monthlyExpense}
+            </h1>
           </div>
         </div>
 

@@ -11,7 +11,7 @@ const Sidebar = () => {
   const { username } = userData;
 
   // prettier-ignore
-  return (<div className="h-screen w-60 border-r-2 border-zinc-700 flex flex-col justify-between items-center bg-[#faf8ff] dark:bg-zinc-900 p-4 ">
+  return (<div className="h-screen w-60 border-r-2 border-zinc-200 flex flex-col justify-between items-center bg-[#faf8ff] dark:bg-zinc-900 dark:border-zinc-700 p-4 ">
 {/* top row */}
   <div className='flex flex-col gap-6 w-full'>
     {/* Logo and Name */}
@@ -56,7 +56,7 @@ const Sidebar = () => {
   
 
 {/* bottom row */}
-<div className='border-t-2 w-full border-zinc-700 py-2 pt-4 dark:text-[#f8f8f8]'>
+<div className='border-t-2 w-full border-zinc-200 dark:border-zinc-700 py-2 pt-4 dark:text-[#f8f8f8]'>
 
 
     <div className="flex items-center justify-center gap-4">

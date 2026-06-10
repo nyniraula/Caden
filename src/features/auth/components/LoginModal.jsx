@@ -1,8 +1,8 @@
 import { ArrowRight, User } from 'lucide-react';
 import CadenLogo from '../../../assets/Caden.svg';
 import { useState } from 'react';
-import Button from '../../../components/ui/Button';
-import Input from '../../../components/ui/Input';
+import Button from '../../../components/ui/Input/Button';
+import Input from '../../../components/ui/Input/Input';
 import useUserContext from '../../../app/hooks/useUserContext';
 import { useNavigate } from 'react-router';
 
@@ -20,12 +20,12 @@ const LoginModal = () => {
   };
 
   return (
-    <div className="relative flex max-w-100 flex-col items-center justify-center gap-4 overflow-hidden rounded-xl p-6 shadow-lg md:p-10">
+    <div className="relative flex max-w-100 flex-col items-center justify-center gap-4 overflow-hidden rounded-xl p-6 shadow-lg md:p-10 dark:bg-zinc-800">
       {/* // corner blur */}
       <div className="absolute top-0 right-0 z-0 aspect-square w-1/2 translate-x-1/2 -translate-y-1/2 rounded-full bg-[#e2dfff] blur-3xl"></div>
 
       {/* logo */}
-      <div className="flex flex-col items-center justify-center rounded-2xl bg-purple-100/50 p-1">
+      <div className="dark flex flex-col items-center justify-center rounded-2xl bg-purple-100/50 p-1">
         <img
           src={CadenLogo}
           alt=""
@@ -37,10 +37,10 @@ const LoginModal = () => {
 
       {/* Welcome msg */}
       <div className="flex w-full flex-col items-center justify-center gap-2 md:gap-3">
-        <h2 className="flex items-center justify-center text-3xl font-semibold text-slate-900 md:text-4xl dark:text-[#f8f8f8]">
+        <h2 className="flex items-center justify-center text-3xl font-semibold text-slate-900 md:text-4xl">
           Welcome to Caden
         </h2>
-        <p className="text-xs text-slate-600 md:text-sm dark:text-slate-200">
+        <p className="text-xs text-slate-600 md:text-sm">
           Enter your name to access your dashboard.
         </p>
       </div>
@@ -48,6 +48,7 @@ const LoginModal = () => {
       {/* input */}
 
       <Input
+        className={'dark:'}
         value={userName}
         placeholder={'John Doe'}
         label={'Your Name'}

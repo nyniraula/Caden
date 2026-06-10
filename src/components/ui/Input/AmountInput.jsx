@@ -1,6 +1,15 @@
-import ErrorText from './ErrorText';
+import useUserContext from '../../../app/hooks/useUserContext';
+import ErrorText from '../feedback/ErrorText';
 
-const AmountInput = ({ currency = 'USD', amount, error = false, ...rest }) => {
+const AmountInput = ({ amount, error = false, ...rest }) => {
+  const {
+    state: {
+      userData: {
+        settings: { currency },
+      },
+    },
+  } = useUserContext(); //just a nested way to destructure currency value from state directly
+
   return (
     <div className="w-full">
       <div className="flex w-full items-center justify-center gap-2 overflow-hidden border-b-3 border-slate-300 pb-2 dark:border-zinc-600">

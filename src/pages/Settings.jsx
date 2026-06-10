@@ -1,5 +1,5 @@
 import useUserContext from '../app/hooks/useUserContext';
-import SelectDropdown from '../components/ui/SelectDropdown';
+import SelectDropdown from '../components/ui/Input/SelectDropdown';
 import { TriangleAlert } from 'lucide-react';
 
 const Settings = () => {

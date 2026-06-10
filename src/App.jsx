@@ -1,14 +1,11 @@
 import { useEffect } from 'react';
 import useUserContext from './app/hooks/useUserContext.js';
-import { router } from './router.jsx';
+import { router } from './app/router.jsx';
 import { RouterProvider } from 'react-router';
 
 const App = () => {
   const { state } = useUserContext();
-  const { userData } = state;
-  const {
-    settings: { theme },
-  } = userData;
+  const theme = state.userData?.settings?.theme || 'light';
 
   useEffect(() => {
     if (theme === 'dark') {

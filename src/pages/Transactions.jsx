@@ -1,14 +1,14 @@
 import { Search } from 'lucide-react';
-import Button from '../components/ui/Button';
-import Input from '../components/ui/Input';
+import Button from '../components/ui/Input/Button';
+import Input from '../components/ui/Input/Input';
 import { Plus } from 'lucide-react';
-import TransactionCard from '../components/ui/TransactionCard';
+import TransactionCard from '../features/TransactionCard/components/TransactionCard';
 import { useState } from 'react';
 import TransactionModal from '../features/TransactionModal/components/TransactionModal';
 import useUserContext from '../app/hooks/useUserContext';
 
 const Transactions = () => {
-  const [isAddModelOpen, setIsAddModelOpen] = useState(false);
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
 
   const { state, dispatch } = useUserContext();
   const { userData } = state;
@@ -31,7 +31,7 @@ const Transactions = () => {
           {/* btn */}
           <Button
             className="fixed right-6 bottom-6 w-auto rounded-full px-4 py-4 md:static md:rounded-lg md:px-4 md:py-3"
-            onClick={() => setIsAddModelOpen(true)}
+            onClick={() => setIsAddModalOpen(true)}
           >
             <span>
               <Plus />
@@ -67,9 +67,9 @@ const Transactions = () => {
           })}
         </div>
       </div>
-      {isAddModelOpen && (
+      {isAddModalOpen && (
         <TransactionModal
-          setIsAddModelOpen={setIsAddModelOpen}
+          setIsAddModalOpen={setIsAddModalOpen}
           dispatch={dispatch}
         />
       )}

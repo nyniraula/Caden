@@ -1,4 +1,4 @@
-import { mergeClass } from '../../lib/utils';
+import { mergeClass } from '../../../lib/utils';
 
 const Button = ({ children, className, ...rest }) => {
   return (

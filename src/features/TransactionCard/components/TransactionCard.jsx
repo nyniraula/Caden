@@ -1,4 +1,6 @@
 import { Trash } from 'lucide-react';
+import useUserContext from '../../../app/hooks/useUserContext';
+import { getCurrencySymbol } from '../../../lib/utils';
 
 const TransactionCard = ({
   id,
@@ -10,6 +12,16 @@ const TransactionCard = ({
   dispatch,
   btn = true,
 }) => {
+  const {
+    state: {
+      userData: {
+        settings: { currency },
+      },
+    },
+  } = useUserContext(); //just a nested way to destructure currency value from state directly
+
+  const currencySymbol = getCurrencySymbol(currency);
+
   return (
     //   {/* item */}
     <div className="flex w-full flex-wrap items-center justify-between gap-2 rounded-lg border border-zinc-400 p-2">
@@ -31,9 +43,13 @@ const TransactionCard = ({
         <div>
           <h6>
             {type.toLowerCase() === 'income' ? (
-              <span className="font-semibold text-green-500">+ $ {amount}</span>
+              <span className="font-semibold text-green-500">
+                + {currencySymbol} {amount}
+              </span>
             ) : (
-              <span className="font-semibold text-red-500">- $ {amount}</span>
+              <span className="font-semibold text-red-500">
+                - {currencySymbol} {amount}
+              </span>
             )}
           </h6>
         </div>

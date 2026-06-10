@@ -1,7 +1,7 @@
 import { ChevronDown, ChevronUp } from 'lucide-react';
 import { useState } from 'react';
-import ErrorText from './ErrorText';
-import { mergeClass } from '../../lib/utils';
+import ErrorText from '../feedback/ErrorText';
+import { mergeClass } from '../../../lib/utils';
 
 const SelectDropdown = ({
   children,

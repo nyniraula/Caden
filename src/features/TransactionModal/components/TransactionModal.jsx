@@ -1,12 +1,12 @@
 import { X } from 'lucide-react';
-import Input from '../../../components/ui/Input';
-import Button from '../../../components/ui/Button';
+import Input from '../../../components/ui/Input/Input';
+import Button from '../../../components/ui/Input/Button';
 import { useState } from 'react';
-import SegmentedControls from '../../../components/ui/SegmentedControls';
-import SelectDropdown from '../../../components/ui/SelectDropdown';
-import Textarea from '../../../components/ui/Textarea';
+import SegmentedControls from '../../../components/ui/Input/SegmentedControls';
+import SelectDropdown from '../../../components/ui/Input/SelectDropdown';
+import Textarea from '../../../components/ui/Input/Textarea';
 import { getDate, validateDate } from '../../../lib/utils';
-import AmountInput from '../../../components/ui/AmountInput';
+import AmountInput from '../../../components/ui/Input/AmountInput';
 import { useEffect } from 'react';
 
 const segmentedControlBtns = ['expense', 'income'];

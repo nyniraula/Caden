@@ -1,4 +1,4 @@
-import ErrorText from './ErrorText';
+import ErrorText from '../feedback/ErrorText';
 
 const Textarea = ({
   children,
