@@ -1,9 +1,9 @@
-import { createContext } from "react";
-import type { UserData } from "./reducers/userReducer";
+import { createContext, type Dispatch } from "react";
+import type { State, Action } from "./reducers/userReducer";
 
 export type UserContextType = {
-  currentUser: string | null;
-  userData: UserData;
+  state: State;
+  dispatch: Dispatch<Action>;
 };
 
 export const UserContext = createContext<UserContextType | null>(null);

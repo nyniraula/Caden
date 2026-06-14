@@ -1,22 +1,26 @@
 import { getStorage } from "../../../lib/localStorage";
 import type { Transaction } from "../../../lib/transactionUtil";
-import type { UserContextType } from "../UserContext";
 
 //types
-type Action =
+export type Action =
   | { type: "ADD_TXN"; newTxn: Transaction }
   | { type: "DEL_TXN"; id: string }
   | { type: "SET_CURR_USER"; newCurrentUser: string | null }
-  | { type: "SET_THEME"; theme: string }
+  | { type: "SET_THEME"; theme: "light" | "dark" }
   | { type: "SET_CURRENCY"; currency: string };
 
 export type UserData = {
-  username: string | null;
+  username: string;
   settings: {
     theme: "light" | "dark";
     currency: string;
   };
   txn: Transaction[];
+};
+
+export type State = {
+  currentUser: string | null;
+  userData: UserData;
 };
 
 //actual code
@@ -29,7 +33,7 @@ const emptyUserData: UserData = {
   txn: [],
 };
 
-const currentUser = getStorage("currentUser");
+const currentUser = getStorage<string>("currentUser");
 
 const createNewUserObject = (currentUser: string): UserData => {
   return {
@@ -45,11 +49,11 @@ const createNewUserObject = (currentUser: string): UserData => {
 export const initialState = {
   currentUser,
   userData: currentUser
-    ? getStorage(currentUser) || createNewUserObject(currentUser)
+    ? getStorage<UserData>(currentUser) || createNewUserObject(currentUser)
     : emptyUserData,
 };
 
-export function userReducer(state: UserContextType, action: Action) {
+export function userReducer(state: State, action: Action): State {
   switch (action.type) {
     case "ADD_TXN":
       if (!state.userData) return state;
@@ -76,7 +80,7 @@ export function userReducer(state: UserContextType, action: Action) {
         ...state,
         currentUser: newUser,
         userData: newUser
-          ? getStorage(newUser) || createNewUserObject(newUser)
+          ? getStorage<UserData>(newUser) || createNewUserObject(newUser)
           : emptyUserData,
       };
     }
