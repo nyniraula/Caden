@@ -3,7 +3,8 @@ import Dashboard from "../pages/Dashboard";
 import Transactions from "../pages/Transactions";
 import Login from "../pages/Login";
 import Settings from "../pages/Settings";
-import ProtectedRoute from "../components/Layout/ProtectedRoute";
+import ProtectedRoute from "../app/routes/ProtectedRoute";
+import AppLayout from "../components/Layout/AppLayout";
 
 export const router = createBrowserRouter([
   {
@@ -14,17 +15,22 @@ export const router = createBrowserRouter([
     Component: ProtectedRoute,
     children: [
       {
-        path: "/",
-        Component: Dashboard,
-      },
-      {
-        path: "/transactions",
-        Component: Transactions,
-      },
+        Component: AppLayout,
+        children: [
+          {
+            path: "/",
+            Component: Dashboard,
+          },
+          {
+            path: "/transactions",
+            Component: Transactions,
+          },
 
-      {
-        path: "/settings",
-        Component: Settings,
+          {
+            path: "/settings",
+            Component: Settings,
+          },
+        ],
       },
     ],
   },
