@@ -7,7 +7,7 @@ export type Transaction = {
   note: string;
 };
 
-type MonthlyEntry = {
+export type MonthlyEntry = {
   month: string;
   income: number;
   expense: number;

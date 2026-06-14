@@ -3,7 +3,7 @@ import { mergeClass } from "../../../lib/utils";
 import ErrorText from "../Feedback/ErrorText";
 
 type Props = {
-  children: ReactNode;
+  children?: ReactNode;
   label?: string;
   type?: string;
   error?: string;

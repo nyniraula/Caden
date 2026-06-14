@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 import ErrorText from "../Feedback/ErrorText";
 
 type Props = {
-  children: ReactNode;
+  children?: ReactNode;
   label?: string;
   error?: string;
 } & React.ComponentPropsWithoutRef<"textarea">;
