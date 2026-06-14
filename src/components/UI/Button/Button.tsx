@@ -3,10 +3,10 @@ import { mergeClass } from "../../../lib/utils";
 
 type Props = {
   children: ReactNode;
-  className: string;
+  className?: string;
 } & React.ComponentPropsWithoutRef<"button">;
 
-const Button = ({ children, className, ...rest }: Props) => {
+const Button = ({ children, className = "", ...rest }: Props) => {
   return (
     <button
       type="button"
