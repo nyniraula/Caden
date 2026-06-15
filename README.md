@@ -21,7 +21,7 @@
 
 <div align="center">
   <img src="./caden-preview.png" alt="Caden Dashboard Preview" width="850" style="border-radius: 12px; box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);" />
-  <p><em>Premium glassmorphic dashboard mockup of the Caden platform</em></p>
+  
 </div>
 
 ---
