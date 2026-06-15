@@ -1,3 +1,4 @@
+import type { Currency } from "../../../constants/currency";
 import { getStorage } from "../../../lib/localStorage";
 import type { Transaction } from "../../../lib/transactionUtil";
 
@@ -13,7 +14,7 @@ export type UserData = {
   username: string;
   settings: {
     theme: "light" | "dark";
-    currency: string;
+    currency: Currency;
   };
   txn: Transaction[];
 };
@@ -105,7 +106,7 @@ export function userReducer(state: State, action: Action): State {
           ...state.userData,
           settings: {
             ...state.userData.settings,
-            currency: action.currency,
+            currency: action.currency as Currency,
           },
         },
       };

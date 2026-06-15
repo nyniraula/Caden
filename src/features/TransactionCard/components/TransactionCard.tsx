@@ -1,6 +1,6 @@
 import { Trash } from "lucide-react";
 import useUserContext from "../../../app/hooks/useUserContext";
-import { getCurrencySymbol } from "../../../lib/utils";
+import { CurrencySymbols } from "../../../constants/currency";
 
 type Props = {
   id: string;
@@ -30,8 +30,6 @@ const TransactionCard = ({
     dispatch,
   } = useUserContext(); //just a nested way to destructure currency value from state directly
 
-  const currencySymbol = getCurrencySymbol(currency);
-
   const formattedDate = new Date(date).toLocaleDateString("en-US", {
     month: "long",
     day: "2-digit",
@@ -50,7 +48,9 @@ const TransactionCard = ({
       <div className="flex flex-wrap items-center justify-start gap-4 md:gap-8">
         {/* category, date */}
         <div className="flex flex-col flex-wrap items-start justify-center">
-          <h5 className="text-base text-zinc-900">{category}</h5>
+          <h5 className="text-base text-zinc-900 dark:text-[#f8f8f8]">
+            {category}
+          </h5>
           <p className="text-xs font-semibold text-zinc-600 dark:text-zinc-400">
             {formattedDate}
           </p>
@@ -67,11 +67,11 @@ const TransactionCard = ({
           <h6>
             {type.toLowerCase() === "income" ? (
               <span className="text-sm font-semibold text-green-500">
-                + {currencySymbol} {amount}
+                + {CurrencySymbols[currency]} {amount}
               </span>
             ) : (
               <span className="text-sm font-semibold text-red-500">
-                - {currencySymbol} {amount}
+                - {CurrencySymbols[currency]} {amount}
               </span>
             )}
           </h6>

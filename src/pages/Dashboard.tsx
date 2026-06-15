@@ -12,7 +12,7 @@ import {
   getGraphData,
 } from "../lib/transactionUtil";
 import { Link } from "react-router";
-import { getCurrencySymbol } from "../lib/utils";
+import { CurrencySymbols } from "../constants/currency";
 
 const Dashboard = () => {
   //global context state and dispatch
@@ -22,8 +22,6 @@ const Dashboard = () => {
     txn,
     settings: { currency },
   } = userData;
-
-  const currencySymbol = getCurrencySymbol(currency);
 
   // state for txn modal
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
@@ -76,21 +74,21 @@ const Dashboard = () => {
           <div className="flex min-h-40 flex-col items-start justify-center gap-3 rounded-lg bg-white px-4 py-2 shadow-2xl dark:bg-zinc-800 dark:text-[#f8f8f8]">
             <p>Net Balance</p>
             <h1>
-              {currencySymbol} {net}
+              {CurrencySymbols[currency]} {net}
             </h1>
           </div>
           {/* Monthly Income */}
           <div className="flex min-h-40 flex-col items-start justify-center gap-3 rounded-lg bg-white px-4 py-2 shadow-2xl dark:bg-zinc-800">
             <p>Total Income</p>
             <h1 className="text-green-500">
-              + {currencySymbol} {monthlyIncome}
+              + {CurrencySymbols[currency]} {monthlyIncome}
             </h1>
           </div>
           {/* Monthly Expense */}
           <div className="flex min-h-40 flex-col items-start justify-center gap-3 rounded-lg bg-white px-4 py-2 shadow-2xl dark:bg-zinc-800">
             <p>Total Expense</p>
             <h1 className="text-red-500">
-              - {currencySymbol} {monthlyExpense}
+              - {CurrencySymbols[currency]} {monthlyExpense}
             </h1>
           </div>
         </div>
@@ -100,8 +98,8 @@ const Dashboard = () => {
 
           {/* recent transactions */}
           <div className="flex min-w-90 flex-1 flex-col dark:text-[#f8f8f8]">
-            <div className="flex rounded-t-xl border-b border-slate-300 bg-white p-4 dark:bg-zinc-800">
-              <h5 className="">Recent Transactions</h5>
+            <div className="flex rounded-t-xl border-b border-slate-300 dark:border-zinc-600 bg-white p-4 dark:bg-zinc-800">
+              <h5 className="font-semibold text-base">Recent Transactions</h5>
             </div>
             <div className="flex flex-col gap-2 bg-white p-4 dark:bg-zinc-800">
               {recentTxn.map((el) => {
@@ -119,7 +117,7 @@ const Dashboard = () => {
                 );
               })}
             </div>
-            <div className="flex rounded-b-xl border-b border-slate-300 bg-white p-4 dark:bg-zinc-800">
+            <div className="flex rounded-b-xl  bg-white p-4 dark:bg-zinc-800">
               <Link to={"/transactions"}>
                 <p className="text-blue-700 hover:text-blue-400 hover:underline">
                   Show more
