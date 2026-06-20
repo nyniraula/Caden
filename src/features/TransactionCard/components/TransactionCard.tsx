@@ -36,56 +36,55 @@ const TransactionCard = ({
     year: "numeric",
   });
 
+  const isIncome = type.toLowerCase() === "income";
+
   return (
     //   {/* item */}
     <div
-      className="group flex w-full flex-wrap items-center justify-between gap-2 rounded-lg border border-zinc-400 p-2 dark:border-zinc-500"
-      onContextMenu={(event) => {
-        event.preventDefault();
-      }}
+      className="group flex w-full items-center justify-between gap-4 rounded-xl border border-zinc-200 bg-white p-3 shadow-sm transition-all duration-200 hover:-translate-y-[1px] hover:shadow-md dark:border-zinc-800 dark:bg-zinc-900"
+      onContextMenu={(event) => event.preventDefault()}
     >
-      {/* date, category, note */}
-      <div className="flex flex-wrap items-center justify-start gap-4 md:gap-8">
-        {/* category, date */}
-        <div className="flex flex-col flex-wrap items-start justify-center">
-          <h5 className="text-base text-zinc-900 dark:text-[#f8f8f8]">
+      {/* LEFT SIDE */}
+      <div className="flex min-w-0 flex-1 flex-col gap-1">
+        {/* top row */}
+        <div className="flex items-center gap-3">
+          <h5 className="text-sm font-semibold text-zinc-900 dark:text-zinc-100">
             {category}
           </h5>
-          <p className="text-xs font-semibold text-zinc-600 dark:text-zinc-400">
+
+          <span className="text-xs text-zinc-500 dark:text-zinc-400">
             {formattedDate}
-          </p>
+          </span>
         </div>
 
-        <div>
-          <p className="max-w-[15ch] truncate text-sm">{note}</p>
-        </div>
+        {/* note */}
+        <p className="max-w-[40ch] truncate text-sm text-zinc-600 dark:text-zinc-400">
+          {note}
+        </p>
       </div>
 
-      <div className="flex items-center justify-start gap-4">
+      {/* RIGHT SIDE */}
+      <div className="flex items-center gap-3">
         {/* amount */}
-        <div>
-          <h6>
-            {type.toLowerCase() === "income" ? (
-              <span className="text-sm font-semibold text-green-500">
-                + {CurrencySymbols[currency]} {amount}
-              </span>
-            ) : (
-              <span className="text-sm font-semibold text-red-500">
-                - {CurrencySymbols[currency]} {amount}
-              </span>
-            )}
-          </h6>
+        <div className="text-right">
+          <span
+            className={`text-sm font-semibold ${
+              isIncome ? "text-green-500" : "text-red-500"
+            }`}
+          >
+            {isIncome ? "+" : "-"} {CurrencySymbols[currency]} {amount}
+          </span>
         </div>
 
-        {/* delete btn */}
+        {/* delete */}
         {btn && (
           <button
-            className="rounded-full bg-red-500/10 p-1 transition-all duration-300 group-hover:block group-focus:block lg:hidden"
+            className="rounded-full bg-red-500/10 p-2 text-red-500 opacity-0 transition-all duration-200 group-hover:opacity-100 lg:opacity-0 lg:group-hover:opacity-100 hover:bg-red-500/20 active:scale-95"
             onClick={() => {
               dispatch({ type: "DEL_TXN", id: id });
             }}
           >
-            <Trash size={18} strokeWidth={1.3} />
+            <Trash size={18} strokeWidth={1.5} />
           </button>
         )}
       </div>
